@@ -1,36 +1,43 @@
-Ext.define('Kitchensink.view.CanvasView', {
-    extend: 'Ext.Container',
-    xtype: 'canvas',
-    config :{
-                html: '<center><canvas id="mycanvas" ontouchstart="javascript:document.location=document.location+\'#role/12\'" width="980" height="760" >no canvas support</canvas></center>',
-                scrollable: true,
-                centered : true,
-                width:1000,
-                height:700,
-                listeners: {
-                    painted: function() {
-		            	var groups = [
-		            	              [{name:"Dev Manager",count:"46",id:4}],
-		            	              [{name:"Product Manager",count:"38",id:5},
-		            	               {name:"Senior Software Engineer",count:"30",id:7},
-		            	               {name:"Senior Sales",count:"32",id:7}],
-		            	              [{name:"CEO",count:"28",id:1},
-		            	               {name:"Sales Manager",count:"22",id:7},
-		            	               {name:"Achitect",count:"21",id:3},
-		            	               {name:"CTO",count:"23",id:2},
-		            	               {name:"Senior QA",count:"22",id:7},
-		            	               {name:"QA Manager",count:"22",id:7}],
-		            	              [{name:"Sales",count:"12",id:6},
-		            	               {name:"Senior Customer Support Expert",count:"19",id:7},
-		            	               {name:"DBA",count:"16",id:7},
-		            	               {name:"Office Admin",count:"17",id:7},
-		            	               {name:"IT Export",count:"11",id:7},
-		            	               {name:"Product Service Expert",count:"35",id:7}],
-		            	              [{name:"programmer",count:"9",id:8},
-		            	               {name:"Sales",count:"8",id:7},
-		            	               {name:"UI Developer",count:"8",id:7},
-		            	               {name:"Java Developer",count:"2",id:7},
-		            	               {name:"Project owner",count:"1",id:7}]
+Ext.define('Kitchensink.components.StarChart',{
+	extend: 'Ext.Component',
+	xtype: 'starchart',
+	template: [{tag : 'canvas',
+		reference: 'starchart',
+		cls: 'starChart',
+        width:1024,
+        height:730
+	}],
+    initialize : function(){
+        this.callParent();
+
+        this.element.on({
+            scope : this,
+            painted: 'onPainted'
+        });
+    },
+    onPainted: function(){
+        var groups = [
+		              [{name:"Dev Manager",count:"46",id:1}],
+		             [{name:"Product Manager",count:"38",id:2},
+		            	               {name:"Senior Software Engineer",count:"30",id:3},
+		            	               {name:"Senior Sales",count:"32",id:4}],
+		            	              [{name:"CEO",count:"28",id:5},
+		            	               {name:"Sales Manager",count:"22",id:6},
+		            	               {name:"Achitect",count:"21",id:7},
+		            	               {name:"CTO",count:"23",id:8},
+		            	               {name:"Senior QA",count:"22",id:9},
+		            	               {name:"QA Manager",count:"22",id:10}],
+		            	              [{name:"Sales",count:"12",id:11},
+		            	               {name:"Senior Customer Support Expert",count:"19",id:12},
+		            	               {name:"DBA",count:"16",id:13},
+		            	               {name:"Office Admin",count:"17",id:14},
+		            	               {name:"IT Export",count:"11",id:15},
+		            	               {name:"Product Service Expert",count:"35",id:16}],
+		            	              [{name:"programmer",count:"9",id:17},
+		            	               {name:"Sales",count:"8",id:18},
+		            	               {name:"UI Developer",count:"8",id:19},
+		            	               {name:"Java Developer",count:"2",id:20},
+		            	               {name:"Project owner",count:"1",id:21}]
 		            	              ];
 		            	var laddler = [90, 60, 40,27,16];
             		    function getCircleGraph(group, ladder){
@@ -61,7 +68,7 @@ Ext.define('Kitchensink.view.CanvasView', {
             				}
             				return {circles:circles, orbit:orbit};
             			}
-            		    var canvas = document.getElementById('mycanvas');   
+            		    var canvas = this.element.dom.firstChild;   
             		      if (canvas.getContext){  
             		          var ctx = canvas.getContext('2d');  
             		      }
@@ -125,12 +132,11 @@ Ext.define('Kitchensink.view.CanvasView', {
             		      }
             		      var pos_i=0;
             		      function getOffset(){
-            		          var jj =[[1,1],[0,0],[-1,-1]]
+            		          var jj =[[1,1],[0,0],[-1,-1]];
             		          pos_i=(pos_i+1)%3;
             		      	return jj[pos_i];
             		      }
             		      draw();
                     }
-                }
-            }
 });
+

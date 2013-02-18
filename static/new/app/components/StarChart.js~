@@ -1,0 +1,20 @@
+Ext.define('Kitchensink.components.StarChart',{
+	extend: 'Ext.Component',
+	xtype: 'starchart',
+	config:{
+		template: [{tag : 'canvas',
+			reference: 'starchart',
+			cls: 'test'
+			}],
+                scrollable: true,
+                centered : true,
+                width:1000,
+                height:700,
+		listeners: {
+			painted: function(){
+			alert(this.element.innerHTML);
+			}	
+		}
+		
+	}
+});

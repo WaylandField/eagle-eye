@@ -1,7 +1,17 @@
 Ext.define('Kitchensink.view.CanvasView', {
-    extend: 'Ext.Container',
+    extend: 'Ext.Panel',
     xtype: 'canvas',
-    config :{
+    requires:['Kitchensink.components.StarChart'],
+    config : {layout: {
+	        type: 'fit'
+	    },
+	    items: [
+            {xtype:'starchart',
+                width:1000,
+                height:700
+            }    
+        ]},
+    config11 :{
                 html: '<center><canvas id="mycanvas" ontouchstart="javascript:document.location=document.location+\'#role/12\'" width="980" height="760" >no canvas support</canvas></center>',
                 scrollable: true,
                 centered : true,
@@ -10,27 +20,27 @@ Ext.define('Kitchensink.view.CanvasView', {
                 listeners: {
                     painted: function() {
 		            	var groups = [
-		            	              [{name:"Dev Manager",count:"46",id:4}],
-		            	              [{name:"Product Manager",count:"38",id:5},
-		            	               {name:"Senior Software Engineer",count:"30",id:7},
-		            	               {name:"Senior Sales",count:"32",id:7}],
-		            	              [{name:"CEO",count:"28",id:1},
-		            	               {name:"Sales Manager",count:"22",id:7},
-		            	               {name:"Achitect",count:"21",id:3},
-		            	               {name:"CTO",count:"23",id:2},
-		            	               {name:"Senior QA",count:"22",id:7},
-		            	               {name:"QA Manager",count:"22",id:7}],
-		            	              [{name:"Sales",count:"12",id:6},
-		            	               {name:"Senior Customer Support Expert",count:"19",id:7},
-		            	               {name:"DBA",count:"16",id:7},
-		            	               {name:"Office Admin",count:"17",id:7},
-		            	               {name:"IT Export",count:"11",id:7},
-		            	               {name:"Product Service Expert",count:"35",id:7}],
-		            	              [{name:"programmer",count:"9",id:8},
-		            	               {name:"Sales",count:"8",id:7},
-		            	               {name:"UI Developer",count:"8",id:7},
-		            	               {name:"Java Developer",count:"2",id:7},
-		            	               {name:"Project owner",count:"1",id:7}]
+		            	              [{name:"Dev Manager",count:"46",id:1}],
+		            	              [{name:"Product Manager",count:"38",id:2},
+		            	               {name:"Senior Software Engineer",count:"30",id:3},
+		            	               {name:"Senior Sales",count:"32",id:4}],
+		            	              [{name:"CEO",count:"28",id:5},
+		            	               {name:"Sales Manager",count:"22",id:6},
+		            	               {name:"Achitect",count:"21",id:7},
+		            	               {name:"CTO",count:"23",id:8},
+		            	               {name:"Senior QA",count:"22",id:9},
+		            	               {name:"QA Manager",count:"22",id:10}],
+		            	              [{name:"Sales",count:"12",id:11},
+		            	               {name:"Senior Customer Support Expert",count:"19",id:12},
+		            	               {name:"DBA",count:"16",id:13},
+		            	               {name:"Office Admin",count:"17",id:14},
+		            	               {name:"IT Export",count:"11",id:15},
+		            	               {name:"Product Service Expert",count:"35",id:16}],
+		            	              [{name:"programmer",count:"9",id:17},
+		            	               {name:"Sales",count:"8",id:18},
+		            	               {name:"UI Developer",count:"8",id:19},
+		            	               {name:"Java Developer",count:"2",id:20},
+		            	               {name:"Project owner",count:"1",id:21}]
 		            	              ];
 		            	var laddler = [90, 60, 40,27,16];
             		    function getCircleGraph(group, ladder){
