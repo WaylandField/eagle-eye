@@ -48,6 +48,7 @@ Ext.define('Kitchensink.controller.Main', {
             'report/:id': 'showReportById',
             'role/:id':'showReportById',
             'user/:id':'showUserById',
+            'cool/:id':'showCarouselById'
             
         },
 
@@ -81,8 +82,8 @@ Ext.define('Kitchensink.controller.Main', {
                     type: 'slide',
                     direction: 'up'
                 }
-    		}
-    		return jj[t]
+    		};
+    		return jj[t];
     	}});
     },
     showUserById : function(id){
@@ -96,10 +97,25 @@ Ext.define('Kitchensink.controller.Main', {
                     type: 'slide',
                     direction: 'up'
                 }
-    		}
-    		return jj[t]
+    		};
+    		return jj[t];
     	}});
     },
+
+    showCarouselById : function(id){
+    	this.showView({get:function get(t){
+    		var jj = {
+                view: 'UserCarousel',
+                animation: {
+                    type: 'slide',
+                    direction: 'up'
+                }
+    		};
+    		return jj[t];
+    	}});
+    },
+
+    
 
     /**
      * Shows the source code for the {@link #currentDemo} in an overlay

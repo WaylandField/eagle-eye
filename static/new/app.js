@@ -23,7 +23,7 @@ Ext.application({
     views: [
         //component demos
         'CanvasView', 'RoleChart', 'RoleView', 'UserChart',
-        'UserDetailView', 'UserSlider', 'UserView'
+        'UserDetailView', 'UserSlider', 'UserView','UserCarousel'
     ],
 
     //loads app/store/Demos.js, which contains the tree data for our main navigation NestedList
