@@ -1,11 +1,12 @@
 Ext.define('Kitchensink.components.StarChart',{
 	extend: 'Ext.Component',
 	xtype: 'starchart',
+    requires :['Kitchensink.util.Utils'],
 	template: [{tag : 'canvas',
 		reference: 'starchart',
 		cls: 'starChart',
         width:1024,
-        height:730
+        height:768
 	}],
     initialize : function(){
         this.callParent();
@@ -14,129 +15,170 @@ Ext.define('Kitchensink.components.StarChart',{
             scope : this,
             painted: 'onPainted'
         });
+        this._store = Ext.getStore("roleStore");
+        this.ROLE_WIDTH = 100;
+        this.ROLE_HEIGHT=60;
+        this.MIN_GAP = 10;
+        this.OFFSET_INDEX=0;
+        this.COLOR_INDEX=0;
     },
     onPainted: function(){
-        var groups = [
-		              [{name:"Dev Manager",count:"46",id:1}],
-		             [{name:"Product Manager",count:"38",id:2},
-		            	               {name:"Senior Software Engineer",count:"30",id:3},
-		            	               {name:"Senior Sales",count:"32",id:4}],
-		            	              [{name:"CEO",count:"28",id:5},
-		            	               {name:"Sales Manager",count:"22",id:6},
-		            	               {name:"Achitect",count:"21",id:7},
-		            	               {name:"CTO",count:"23",id:8},
-		            	               {name:"Senior QA",count:"22",id:9},
-		            	               {name:"QA Manager",count:"22",id:10}],
-		            	              [{name:"Sales",count:"12",id:11},
-		            	               {name:"Senior Customer Support Expert",count:"19",id:12},
-		            	               {name:"DBA",count:"16",id:13},
-		            	               {name:"Office Admin",count:"17",id:14},
-		            	               {name:"IT Export",count:"11",id:15},
-		            	               {name:"Product Service Expert",count:"35",id:16}],
-		            	              [{name:"programmer",count:"9",id:17},
-		            	               {name:"Sales",count:"8",id:18},
-		            	               {name:"UI Developer",count:"8",id:19},
-		            	               {name:"Java Developer",count:"2",id:20},
-		            	               {name:"Project owner",count:"1",id:21}]
-		            	              ];
-		            	var laddler = [90, 60, 40,27,16];
-            		    function getCircleGraph(group, ladder){
-            				var circles = [];
-            				var orbit = [];
-            				var angle = 0, lastAngle=0;
-            				var pos = {};
-            				var x=0, y=0 ;
-            				var radius = 0;
-            				var start_angle=0;
-            				var last_start_angle = 0;
-            				for(var i=0;i<group.length;i++){
-            					var startAngle = lastAngle;
-            					angle = (Math.PI*2)/group[i].length;
-            					start_angle = angle/2; 
-            					lastAngle = angle;
-            					radius += i>1?ladder[i]+ladder[i-1]+1:1+ladder[i];
-            					orbit.push(radius);
-            					for(var j=0;j<group[i].length;j++){
-            						pos = {
-            								x:i>0?Math.cos(last_start_angle+start_angle+(j)*angle)*radius:0, 
-            								y:i>0?Math.sin(last_start_angle+start_angle+(j)*angle)*radius:0, 
-            								r:ladder[i]
-            							};
-            						circles.push({"pos":pos, data:group[i][j]});
-            					}
-            					last_start_angle = last_start_angle + start_angle;
-            				}
-            				return {circles:circles, orbit:orbit};
-            			}
-            		    var canvas = this.element.dom.firstChild;   
-            		      if (canvas.getContext){  
-            		          var ctx = canvas.getContext('2d');  
-            		      }
-            		      var titleArray = [];
-            		      var x=canvas.width/2;y=canvas.height/2;
-            		      var color_i=0;
-            		      function draw(){
-            		  		color_i = 0;
-            		  	    ctx.clearRect(0,0,canvas.width,canvas.height);
-            		  	    graph = getCircleGraph(groups, laddler);
+        this._roles = this._store.get('mockData');
+        this._groups = Kitchensink.util.Utils.kmeans(this._roles, 'count', 5);
+        this._prepareData();
+        this._drawGraph();
+    },
+    _getBubbleR : function(count, min){
+        return min?(count>this.MIN_GAP?count:this.MIN_GAP):count;
+    },
+    _checkOverlap : function(x1,y1,r1,x2,y2,r2){
+        var xDif = Math.abs(x1-x2);
+        var yDif = Math.abs(y1-y2);
+        return xDif<this.ROLE_WIDTH&&yDif<this.ROLE_HEIGHT||((xDif*xDif+yDif*yDif)<(r1+r2)*(r1+r2));
+    },
+    _getStartDegree : function(){
+        if(this._degreeIndex==null){
+            this._degreeIndex = 0;
+        }
+        this._degreeIndex++;
+        return 60*(this._degreeIndex%6);
+    },
+    _prepareData : function(){
+        var groups = this._groups;
+        var pos = {}, curPos;
+        this._bubbles = [];
+        this._borders = [];
+        var step = 0;
+        var globalR = 0;
+        var globalBorder =0;
+        var r = 0,x,y;
+        var degree = 0;
+        var degreeStep = 10;
+        var group;
+        for(var i=0;i<groups.length;i++){
+            group=groups[i];
+            degree = this._getStartDegree();
+            r = this._getBubbleR(group[0].count, true);
+            if(i===0){
+                if((group&&group.length<2||group.length>3)){
+                    globalR = 0;
+                }else{
+                    //globalBorder = r;
+                }
+            }else{
+                globalBorder+=3;
+                globalR = globalBorder+r;
+                globalBorder+=2*r;
+            }
+            this.degreeCrossed = 0;
+            for(var j=0;j<group.length;j++){
+                var positioned = false;
 
-            		  		orbit = graph['orbit'];
-            		  	    ctx.strokeStyle="rgba(30,30,30, 0.2)";
-            		  		for(var i=0;i<orbit.length;i++){
-            		  			ctx.beginPath(); 
-            		  			ctx.arc(x,y,orbit[i],0,Math.PI*2 ,false); // Outer circle 
-            		  			ctx.closePath();
-            		  			ctx.stroke();
-            		  		}
-            		  	    
-            		  	    circles = graph['circles'];
-            		  		var offset = getOffset();
-            		  		for(var i=0;i<circles.length;i++){
-            		  			var pos = circles[i].pos;
-            		  			var data = circles[i].data;
-            		  			var color = getStyle();
-            		  			ctx.fillStyle="rgba("+color[0]+", "+color[1]+", "+color[2]+", 0.5)";
-            		  			ctx.strokeStyle="rgba("+color[0]+", "+color[1]+", "+color[2]+", 1)";
-            		  			ctx.beginPath();  
-            		  			ctx.arc(pos.x+x+offset[0],pos.y+y+offset[1],pos.r,0,Math.PI*2 ,false); // Outer circle  
-            		  			ctx.closePath();  
-            		  			ctx.stroke();
-            		  			ctx.fill();
-            		  			ctx.fillStyle="#ff0000";
-            		  			ctx.font="bold 15pt Calibri";
-            		  			ctx.shadowColor="white";
-            		  			ctx.shadowBlur = 10;
-            		  			ctx.fillText(data.count,pos.x+x+offset[0],pos.y+y+offset[1]);
-            		  			ctx.fillStyle="#000000";
-            		  			ctx.font="normal 8pt Calibri";
-            		  			ctx.shadowColor="white";
-            		  			ctx.shadowBlur = 10;
-            		  			ctx.fillText(data.name,pos.x+x+offset[0],pos.y+y+offset[1]+20);
-            		  		}
-            		      }
-            		      function getStyle(){
-            		  		var colors = [
-            		  				[60,90,120],
-            		  				[120,90,60],
-            		  				[30,90,150],
-            		  				[150,30,90],
-            		  				[30,90,180],
-            		  				[100,230,1],
-            		  				[22,67,99],
-            		  				[66,43,97],
-            		  				[99,200,10],
-            		  				[66,250,11]
-            		  					];
-            		  		color_i = (color_i+1) % 10;
-            		  		return colors[color_i];
-            		      }
-            		      var pos_i=0;
-            		      function getOffset(){
-            		          var jj =[[1,1],[0,0],[-1,-1]];
-            		          pos_i=(pos_i+1)%3;
-            		      	return jj[pos_i];
-            		      }
-            		      draw();
+                while(!positioned){
+                    if(this.degreeCrossed>=360){
+                        this.degreeCrossed=0;
+                        degree = this._getStartDegree();
+                        r=this._getBubbleR(group[j].count, true);
+                        globalR = globalBorder+5;
+                        globalBorder+=5+r;
                     }
+
+                    x=Math.cos(degree)*globalR; 
+        			y=Math.sin(degree)*globalR; 
+
+                    positioned = true;
+                    curPos = {
+                        x:x, 
+        			    y:y, 
+        			    r: this._getBubbleR(group[j].count)
+                    };
+                    for(var k=0;k<this._bubbles.length;k++){
+                        pos = this._bubbles[k].pos;
+                        if(this._checkOverlap(curPos.x,curPos.y,curPos.r, 
+                                              pos.x,pos.y,pos.r)){
+                            positioned = false;
+                            break;
+                        }
+                    }
+
+       	            positioned&&this._bubbles.push({pos:curPos, data:group[j]});
+                    degree += degreeStep;
+                    this.degreeCrossed +=degreeStep;
+                }
+            }
+           globalBorder+=3;
+            this._borders.push(globalBorder);
+        }
+    },
+    _drawGraph : function(){
+        var canvas = this.element.dom.firstChild;   
+        if (canvas.getContext){  
+            var ctx = canvas.getContext('2d');  
+        }
+        var titleArray = [];
+        var x=canvas.width/2,y=canvas.height/2;
+        var color_i=0;
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        var orbit = this._borders;
+        ctx.strokeStyle="rgba(199,199,199, 0.2)";
+        var r=204, g=255, b=204;
+        for(var i=orbit.length-1;i>=0;i--){
+            ctx.beginPath(); 
+            ctx.arc(x,y,orbit[i],0,Math.PI*2 ,false); // Outer circle 
+            ctx.closePath();
+            ctx.fillStyle="rgba("+r+","+g+","+b+", "+(orbit.length-i)/orbit.length+")";
+            ctx.fill();
+            ctx.stroke();
+        }
+        
+        var circles = this._bubbles;
+        var offset = this._getOffset();
+        for(var i=0;i<circles.length;i++){
+            var pos = circles[i].pos;
+            var data = circles[i].data;
+            var color = this._getColor();
+            ctx.fillStyle="rgba("+color[0]+", "+color[1]+", "+color[2]+", 0.5)";
+            ctx.strokeStyle="rgba("+color[0]+", "+color[1]+", "+color[2]+", 1)";
+            ctx.beginPath();  
+            ctx.arc(pos.x+x+offset[0],pos.y+y+offset[1],pos.r,0,Math.PI*2 ,false); // Outer circle  
+            ctx.closePath();  
+            ctx.stroke();
+            ctx.fill();
+            ctx.fillStyle="#ff0000";
+            ctx.font="bold 15pt Calibri";
+            ctx.shadowColor="white";
+            ctx.shadowBlur = 10;
+            ctx.fillText(data.count,pos.x+x+offset[0],pos.y+y+offset[1]);
+            ctx.fillStyle="#ffffff";
+            ctx.font="normal 9pt Calibri";
+            ctx.shadowColor="black";
+            ctx.shadowBlur = 6;
+            ctx.fillText(data.name,pos.x+x+offset[0],pos.y+y+offset[1]+10);
+        }
+    },
+    _getColor : function(){
+        var colors = [
+            [60,90,120],
+            [120,90,60],
+            [30,90,150],
+            [150,30,90],
+            [30,90,180],
+            [100,230,1],
+            [22,67,99],
+            [66,43,97],
+            [99,200,10],
+            [66,250,11]
+        ];
+        this.COLOR_INDEX = (this.COLOR_INDEX+1) % 10;
+        return colors[this.COLOR_INDEX];
+    },
+
+    _getOffset: function(){
+        var jj =[[1,1],[0,0],[-1,-1]];
+        this.OFFSET_INDEX=(this.OFFSET_INDEX+1)%3;
+        return jj[this.OFFSET_INDEX];
+    }
+
+    
 });
 

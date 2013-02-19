@@ -7,8 +7,6 @@ Ext.define('Kitchensink.view.CanvasView', {
 	    },
 	    items: [
             {xtype:'starchart',
-                width:1000,
-                height:700
-            }    
+            store:'roleStore'}
         ]}
 });

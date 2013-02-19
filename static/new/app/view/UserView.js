@@ -5,7 +5,7 @@ Ext.define('Kitchensink.view.UserView', {
                 ,'Kitchensink.view.PromoteDetailView','Kitchensink.view.UserDetailView'],
     config :{
 	    layout: {
-	        type: 'hbox',
+	        type: 'hbox'
 	    },
 	    items: [
 	            {	xtype : 'tabpanel',

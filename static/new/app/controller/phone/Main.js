@@ -39,7 +39,7 @@ Ext.define('Kitchensink.controller.phone.Main', {
                 layout.setAnimation(initialAnim);
             }, this, { single: true });
         }
-
+/**
         this.getToolbar().setTitle(item.get('text'));
         this.getToolbar().insert(0, {
         	xtype:'button',
@@ -47,6 +47,7 @@ Ext.define('Kitchensink.controller.phone.Main', {
             ui: 'back',
             align: 'left'
         });
+**/
         this.getLaunchscreen().removeAll(true, true);
         this.getLaunchscreen().setItems([view]);
 //        nav.goToNode(item.parentNode);

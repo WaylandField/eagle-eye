@@ -22,12 +22,12 @@ Ext.define('Kitchensink.view.phone.Main', {
         },
 
         items: [
-            {
+/**            {
                 id: 'mainNavigationBar',
                 xtype : 'titlebar',
                 docked: 'top',
                 title : 'Eagle Eyes - Team Career Growth In-depth',
-            },
+            },**/
             {
                 id: 'launchscreen',
                 cls : 'container',
