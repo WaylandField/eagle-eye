@@ -101,7 +101,7 @@ Ext.define('Kitchensink.components.StarChart',{
                         }
                     }
 
-       	            positioned&&this._bubbles.push({pos:curPos, data:group[j]});
+       	            positioned&&this._bubbles.push({pos:curPos, data:group[j], group:i});
                     degree += degreeStep;
                     this.degreeCrossed +=degreeStep;
                 }
@@ -121,11 +121,15 @@ Ext.define('Kitchensink.components.StarChart',{
         ctx.clearRect(0,0,canvas.width,canvas.height);
         var orbit = this._borders;
         ctx.strokeStyle="rgba(199,199,199, 0.2)";
+        ctx.shadowColor='black';
+        ctx.shadowBlur=20;
         var r=204, g=255, b=204;
         for(var i=orbit.length-1;i>=0;i--){
             ctx.beginPath(); 
             ctx.arc(x,y,orbit[i],0,Math.PI*2 ,false); // Outer circle 
             ctx.closePath();
+//            var color = this._getColor(i);
+//            ctx.fillStyle="rgba("+color[0]+","+color[1]+","+color[2]+", "+(orbit.length-i)/orbit.length+")";
             ctx.fillStyle="rgba("+r+","+g+","+b+", "+(orbit.length-i)/orbit.length+")";
             ctx.fill();
             ctx.stroke();
@@ -136,8 +140,20 @@ Ext.define('Kitchensink.components.StarChart',{
         for(var i=0;i<circles.length;i++){
             var pos = circles[i].pos;
             var data = circles[i].data;
-            var color = this._getColor();
-            ctx.fillStyle="rgba("+color[0]+", "+color[1]+", "+color[2]+", 0.5)";
+            var bubbleX = pos.x+x+offset[0];
+            var bubbleY = pos.y+y+offset[1];
+            var color = this._getColor(circles[i].group);
+            var radius = pos.r;
+//            ctx.clearShadow();
+            ctx.shadowBlur=1;
+            if(radius<=2){
+                ctx.fillStyle="rgba("+color[0]+", "+color[1]+", "+color[2]+", 0.5)";
+            }else{
+                var grd = ctx.createRadialGradient(bubbleX-radius/Math.sqrt(2),bubbleY+radius/Math.sqrt(2),2*radius-5,bubbleX+radius/Math.sqrt(2),bubbleY-radius/Math.sqrt(2),5);
+                grd.addColorStop(0,"rgba("+color[0]+", "+color[1]+", "+color[2]+", 0.5)");
+                grd.addColorStop(1,"white");
+                ctx.fillStyle=grd;
+            }
             ctx.strokeStyle="rgba("+color[0]+", "+color[1]+", "+color[2]+", 1)";
             ctx.beginPath();  
             ctx.arc(pos.x+x+offset[0],pos.y+y+offset[1],pos.r,0,Math.PI*2 ,false); // Outer circle  
@@ -156,8 +172,14 @@ Ext.define('Kitchensink.components.StarChart',{
             ctx.fillText(data.name,pos.x+x+offset[0],pos.y+y+offset[1]+10);
         }
     },
-    _getColor : function(){
+    _getColor : function(i){
         var colors = [
+            [100,230,1],//bright green
+            [22,67,99],//blue
+            [120,90,60],
+            [66,250,11],
+            [99,200,10],
+            [30,90,150],
             [60,90,120],
             [120,90,60],
             [30,90,150],
@@ -169,8 +191,8 @@ Ext.define('Kitchensink.components.StarChart',{
             [99,200,10],
             [66,250,11]
         ];
-        this.COLOR_INDEX = (this.COLOR_INDEX+1) % 10;
-        return colors[this.COLOR_INDEX];
+//        this.COLOR_INDEX = (this.COLOR_INDEX+1) % 10;
+        return colors[i];
     },
 
     _getOffset: function(){
