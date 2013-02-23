@@ -16,7 +16,7 @@
 <enable_mouse_wheel>yes</enable_mouse_wheel>
 <slideshow_delay>3.5</slideshow_delay>
 <background_color>#000000</background_color>
-<preloader_path>load/graphics/preloader.png</preloader_path>
+<preloader_path>resources/testdata/graphics/preloader.png</preloader_path>
 <preloader_size>32</preloader_size>
 <preloader_color>#FFFFFF</preloader_color>
 <!--    THUMBS SETTINGS    -->
@@ -37,11 +37,11 @@
 <slide_show_preloader_fill_color>#FFFFFF</slide_show_preloader_fill_color>
 <slide_show_preloader_background_color>#222222</slide_show_preloader_background_color>
 <!--    BUTTONS SETTINGS    -->
-<buttons_background_path>load/graphics/button_background.png</buttons_background_path>
-<buttons_next_icon_path>load/graphics/button_next_icon.png</buttons_next_icon_path>
-<buttons_prev_icon_path>load/graphics/button_prev_icon.png</buttons_prev_icon_path>
-<buttons_play_icon_path>load/graphics/button_play_icon.png</buttons_play_icon_path>
-<buttons_pause_icon_path>load/graphics/button_pause_icon.png</buttons_pause_icon_path>
+<buttons_background_path>resources/testdata/graphics/button_background.png</buttons_background_path>
+<buttons_next_icon_path>resources/testdata/graphics/button_next_icon.png</buttons_next_icon_path>
+<buttons_prev_icon_path>resources/testdata/graphics/button_prev_icon.png</buttons_prev_icon_path>
+<buttons_play_icon_path>resources/testdata/graphics/button_play_icon.png</buttons_play_icon_path>
+<buttons_pause_icon_path>resources/testdata/graphics/button_pause_icon.png</buttons_pause_icon_path>
 <show_next_button>yes</show_next_button>
 <show_prev_button>yes</show_prev_button>
 <show_play_button>yes</show_play_button>
@@ -66,39 +66,39 @@
 <scrollbar_y_position>573</scrollbar_y_position>
 <scrollbar_handler_color>#FFFFFF</scrollbar_handler_color>
 <scrollbar_track_bar_color>#222222</scrollbar_track_bar_color>
-<scrollbar_lines_image_path>load/graphics/lines.png</scrollbar_lines_image_path>
+<scrollbar_lines_image_path>resources/testdata/graphics/lines.png</scrollbar_lines_image_path>
 <!--    ADD / REMOVE IMAGES FORM THE CAROUSEL    -->
 <images>
 <image>
-<image_path>load/images/1.jpg</image_path>
+<image_path>resources/testdata/images/1.jpg</image_path>
 <text>This is image 1!</text>
 </image>
 <image>
-<image_path>load/images/2.jpg</image_path>
+<image_path>resources/testdata/images/2.jpg</image_path>
 <text>This is image 2!</text>
 </image>
 <image>
-<image_path>load/images/3.jpg</image_path>
+<image_path>resources/testdata/images/3.jpg</image_path>
 <text>This is image 3!</text>
 </image>
 <image>
-<image_path>load/images/4.jpg</image_path>
+<image_path>resources/testdata/images/4.jpg</image_path>
 <text>This is image 4!</text>
 </image>
 <image>
-<image_path>load/images/5.jpg</image_path>
+<image_path>resources/testdata/images/5.jpg</image_path>
 <text>This is image 5!</text>
 </image>
 <image>
-<image_path>load/images/6.jpg</image_path>
+<image_path>resources/testdata/images/6.jpg</image_path>
 <text>This is image 6!</text>
 </image>
 <image>
-<image_path>load/images/7.jpg</image_path>
+<image_path>resources/testdata/images/7.jpg</image_path>
 <text>This is image 7!</text>
 </image>
 <image>
-<image_path>load/images/8.jpg</image_path>
+<image_path>resources/testdata/images/8.jpg</image_path>
 <text>This is image 8!</text>
 </image>
 </images>

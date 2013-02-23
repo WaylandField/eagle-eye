@@ -686,12 +686,13 @@ function Thumb(a, b, c, d) {
 }
 function Data(a) {
 	function c(a) {
+        // canvas_image
 		b.canvasWidth = 1024;//parseInt($(a).find("canvas_width").text());
 		b.canvasHeight = 768;//parseInt($(a).find("canvas_height").text());
 		b.centerX = 0;//parseInt($(a).find("carousel_center_x").text());
 		b.centerY = 0;//parseInt($(a).find("carousel_center_y").text());
-		b.radiusX = 200;//parseInt($(a).find("radius_x").text());
-		b.radiusY = 100;//parseInt($(a).find("radius_y").text());
+		b.radiusX = 500;//parseInt($(a).find("radius_x").text());
+		b.radiusY = 150;//parseInt($(a).find("radius_y").text());
 		b.radiusZ = 400;//parseInt($(a).find("radius_z").text());
 		b.carouselAngle = parseInt($(a).find("carousel_rotation_angle").text());
 		b.backThumbTransparency = $(a).find("back_thumb_transparency").text();
@@ -1038,7 +1039,9 @@ function DemoCanvasCarousel(a, b) {
 		})
 	}
 
-    function swipte(){}
+    function swipe(){
+        alert('ffads');
+    }
 	
 	//get images 
 	function bI() {
@@ -1091,7 +1094,8 @@ function DemoCanvasCarousel(a, b) {
 			ba.container.onMouseOut = bL;
 			ba.container.onClick = bM;
             ba.container.onTouchStart = bM;
-			a += 100
+//            ba.container.onSwipe = bM;
+			a += 100;
 		}
 		t.rotation = K.carouselAngle;
 		q[0].selected = true;
@@ -1659,10 +1663,11 @@ function DemoCanvasCarousel(a, b) {
 		Touch.enable(s);
 		t = new Container;
 		s.addChild(t);
-		K.centerX = 364;
-		K.centerY = 220;
-		bc.centerX = 364;
-		bc.centerY = 300;
+        // canvas main size
+		K.centerX = 512;
+		K.centerY = 100;
+		bc.centerX = 512;
+		bc.centerY = 100;
 		K.carouselAngle = bc.carouselAngle;
 		_.src = bc.preloaderPath;
 		_.onload = bm;

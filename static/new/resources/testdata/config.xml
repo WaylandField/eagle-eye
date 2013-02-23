@@ -74,6 +74,38 @@
 <text>This is image 1!</text>
 </image>
 <image>
+<image_path>resources/testdata/images/1.jpg</image_path>
+<text>This is image 1!</text>
+</image>
+<image>
+<image_path>resources/testdata/images/1.jpg</image_path>
+<text>This is image 1!</text>
+</image>
+<image>
+<image_path>resources/testdata/images/1.jpg</image_path>
+<text>This is image 1!</text>
+</image>
+<image>
+<image_path>resources/testdata/images/1.jpg</image_path>
+<text>This is image 1!</text>
+</image>
+<image>
+<image_path>resources/testdata/images/1.jpg</image_path>
+<text>This is image 1!</text>
+</image>
+<image>
+<image_path>resources/testdata/images/1.jpg</image_path>
+<text>This is image 1!</text>
+</image>
+<image>
+<image_path>resources/testdata/images/1.jpg</image_path>
+<text>This is image 1!</text>
+</image>
+<image>
+<image_path>resources/testdata/images/1.jpg</image_path>
+<text>This is image 1!</text>
+</image>
+<image>
 <image_path>resources/testdata/images/2.jpg</image_path>
 <text>This is image 2!</text>
 </image>
