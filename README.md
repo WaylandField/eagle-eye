@@ -1,6 +1,8 @@
 eagle-eye
 =========
 
-Demo for hackday
-Will Add User case here:
-1. EM 
+Rest API URL
+/api/roles/? to get all the roles data by query
+
+Static Content URL
+/web/
