@@ -16,16 +16,16 @@ var rawBody = function(req, res, next) {
 /** config **/
 app.use('/web', express.static(__dirname+'/static'));
 
-//app.get('/service', function(req, res) {
-//    res.send('Hello from Cloud Foundry');
-//});
+app.get('/service', function(req, res) {
+    res.send('Hello from Cloud Foundry');
+});
 
 app.use(express.logger());
 //app.use(rawBody);
 //app.use(express.methodOverride());
-//app.use(express.bodyParser());
-//app.use(app.router);
-//app.use(express.logger({ format: ':method :url' }));
+app.use(express.bodyParser());
+app.use(app.router);
+app.use(express.logger({ format: ':method :url' }));
 
 
 app.use(function(err, req, res, next){
@@ -34,6 +34,6 @@ app.use(function(err, req, res, next){
   res.send(500, 'Something broke!');
 });
 
-//require('./controller')(app);
+require('./controller')(app);
 app.listen(3000);
 

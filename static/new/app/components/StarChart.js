@@ -123,7 +123,7 @@ Ext.define('Kitchensink.components.StarChart',{
         ctx.strokeStyle="rgba(199,199,199, 0.2)";
         ctx.shadowColor='black';
         ctx.shadowBlur=20;
-        var r=204, g=255, b=204;
+        var r=255, g=255, b=255;
         for(var i=orbit.length-1;i>=0;i--){
             ctx.beginPath(); 
             ctx.arc(x,y,orbit[i],0,Math.PI*2 ,false); // Outer circle 
@@ -143,6 +143,7 @@ Ext.define('Kitchensink.components.StarChart',{
             var bubbleX = pos.x+x+offset[0];
             var bubbleY = pos.y+y+offset[1];
             var color = this._getColor(circles[i].group);
+//            var color = [255, 255, 255];
             var radius = pos.r;
 //            ctx.clearShadow();
             ctx.shadowBlur=1;
@@ -154,28 +155,30 @@ Ext.define('Kitchensink.components.StarChart',{
                 grd.addColorStop(1,"white");
                 ctx.fillStyle=grd;
             }
-            ctx.strokeStyle="rgba("+color[0]+", "+color[1]+", "+color[2]+", 1)";
+            ctx.strokeStyle="rgba("+color[0]+", "+color[1]+", "+color[2]+", 0.5)";
             ctx.beginPath();  
             ctx.arc(pos.x+x+offset[0],pos.y+y+offset[1],pos.r,0,Math.PI*2 ,false); // Outer circle  
             ctx.closePath();  
             ctx.stroke();
             ctx.fill();
-            ctx.fillStyle="#ff0000";
+
+            ctx.fillStyle="#000000";
             ctx.font="bold 15pt Calibri";
-            ctx.shadowColor="white";
-            ctx.shadowBlur = 10;
+            ctx.clearShadow();
+//            ctx.shadowColor="white";
+//            ctx.shadowBlur = 10;
             ctx.fillText(data.count,pos.x+x+offset[0],pos.y+y+offset[1]);
-            ctx.fillStyle="#ffffff";
+            ctx.fillStyle="black";
             ctx.font="normal 9pt Calibri";
-            ctx.shadowColor="black";
+            ctx.shadowColor="gray";
             ctx.shadowBlur = 6;
             ctx.fillText(data.name,pos.x+x+offset[0],pos.y+y+offset[1]+10);
         }
     },
     _getColor : function(i){
         var colors = [
-            [100,230,1],//bright green
             [22,67,99],//blue
+            [100,230,1],//bright green
             [120,90,60],
             [66,250,11],
             [99,200,10],
