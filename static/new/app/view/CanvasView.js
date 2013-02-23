@@ -1,15 +1,18 @@
 Ext.define('Kitchensink.view.CanvasView', {
     extend: 'Ext.Panel',
     xtype: 'canvas',
-    requires:['Kitchensink.components.StarChart'],
+    requires:['Kitchensink.components.StarChart','Kitchensink.components.ProgressBar'],
     config : {
         layout: {
-	        type: 'vbox'
+	        type: 'box'
 	    },
 	    items: [
             {
                 xtype:'starchart',
-                store:'roleStore'
+                width:738
+            },
+            {
+                xtype:'list'
             }
         ]
     }
