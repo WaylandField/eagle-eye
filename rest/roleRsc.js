@@ -5,7 +5,7 @@ module.exports = function(app, options){
         console.log(req.params);
         var longitude = req.params.longtitude;
         var teamview = req.params.teamview;
-        var query ={latitude:latitude};
+        var query ={name:'miralce'};
         dao.getRoles(query, function(records){
             res.send(records);
         });

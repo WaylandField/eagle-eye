@@ -3,18 +3,36 @@ Ext.define('Kitchensink.view.CanvasView', {
     xtype: 'canvas',
     requires:['Kitchensink.components.StarChart','Kitchensink.components.ProgressBar'],
     config : {
+        refs: {
+            nav: '#reportsNavi'
+        },
         layout: {
-	        type: 'box'
+	        type: 'fit'
 	    },
 	    items: [
             {
                 xtype:'starchart',
-                width:738
-            },
+                width:1024,
+                height:680
+            }/**,
             {
-                xtype:'list'
-            }
+                docked: 'bottom',
+                xtype:'sliderfield',
+                label:'Team View',
+                value: 50,
+                minValue: 0,
+                maxValue: 100
+            }**/
         ]
+    },
+    initialize : function(){
+        this.callParent();
+        var toolbar = Ext.getCmp('mainNavigationBar');
+        toolbar.add({
+            iconCls : 'action',
+            align: 'right',
+            title: 'Map'
+        });
     }
     
 });

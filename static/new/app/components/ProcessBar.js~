@@ -1,9 +1,0 @@
-Ext.define('Kinchensink.components.ProgressBar', {
-    extend : 'Ext.Component',
-    xtype: 'progressbar',
-    template : [{
-        tag : 'progress',
-        value : 50,
-        max: 100
-    }]
-});

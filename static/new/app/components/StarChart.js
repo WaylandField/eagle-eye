@@ -5,7 +5,7 @@ Ext.define('Kitchensink.components.StarChart',{
 	template: [{tag : 'canvas',
 		reference: 'starchart',
 		cls: 'starChart',
-        width:738,
+        width:1024,
         height:700
 	}],
     initialize : function(){

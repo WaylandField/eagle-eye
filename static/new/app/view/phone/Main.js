@@ -8,7 +8,9 @@ Ext.define('Kitchensink.view.phone.Main', {
         'Kitchensink.view.RoleView',
 		'Kitchensink.view.CanvasView'
     ],
-
+    refs: {
+        nav: '#reportsNavi'
+    },
     config: {
         fullscreen: true,
 
