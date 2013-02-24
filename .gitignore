@@ -1,0 +1,5 @@
+*~
+*.swp
+#*#
+db/**/* 
+static/new/resources/sass/.sass-cache/**/*
