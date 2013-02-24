@@ -1,6 +1,6 @@
 $base-color: black;
 $base-gradient: 'glossy';
-$toolbar-input-border-color: orange; 
+$include-default-icons:true;
 
 @import 'sencha-touch/default/all';
 

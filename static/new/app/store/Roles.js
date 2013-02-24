@@ -27,5 +27,12 @@ Ext.define('Kitchensink.store.Roles',{
 		            	               {name:"UI Developer",count:8,id:19},
 		            	               {name:"Java Developer",count:2,id:20},
 		            	               {name:"Project owner",count:1,id:21}]
+    },
+    randomMockData : function(){
+        var r = [];
+        for(var i=0;i<20;i++){
+            r.push({name:'role'+i, count:Math.ceil(Math.random()*100)+1, id:i});
+        }
+        return r;
     }
 });

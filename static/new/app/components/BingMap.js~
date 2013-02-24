@@ -1,0 +1,17 @@
+Ext.define('kitchensink.components.BingMap',{
+    extend: 'Ext.Component',
+    xtype:'bingMap',
+    template: [{
+        tag:"div",
+        reference: 'chart',
+        cls: 'bingMap'
+    }],
+    initialize : function(){
+        this.callParent();
+        this.element.on({
+            scope : this,
+            painted : 'paint'
+        });
+    },
+    paint : function(){}
+});

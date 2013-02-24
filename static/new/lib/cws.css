@@ -4,5 +4,9 @@
     Background-color:black
 }
 .coolCarousel{
-    Background-color:white
+    Background-color:white;
+}
+.bingMap{
+    width:100%;
+    height:100%;
 }
