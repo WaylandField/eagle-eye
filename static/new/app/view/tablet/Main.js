@@ -8,11 +8,10 @@ Ext.define('Kitchensink.view.tablet.Main', {
         'Kitchensink.view.RoleView',
 		'Kitchensink.view.CanvasView'
     ],
+
     config: {
         fullscreen: true,
-        refs: {
-            nav: '#reportsNavi'
-        },
+
         layout: {
             type: 'card',
             animation: {
