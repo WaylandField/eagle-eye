@@ -1,5 +1,5 @@
-var url = "eagleEye";
-var db = require("mongojs").connect("eagleEye",['roles']);
+var url = "eagleEyeDB";
+var db = require("mongojs").connect("eagleEyeDB",['roles']);
 exports.getDb = function(){
     console.log(db.navigations);
     if(!db){

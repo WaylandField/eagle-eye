@@ -6,7 +6,7 @@ Ext.define('Kitchensink.components.StarChart',{
 		reference: 'starchart',
 		cls: 'starChart',
         width:1024,
-        height:710
+        height:718
 	}],
     initialize : function(){
         this.callParent();
@@ -234,7 +234,7 @@ Ext.define('Kitchensink.components.StarChart',{
 //            ctx.clearShadow();
             ctx.shadowColor='white';
             ctx.shadowBlur=3;
-            if(radius<=2){
+            if(radius<=4){
                 ctx.fillStyle=color;//"rgba("+color[0]+", "+color[1]+", "+color[2]+", 0.5)";
             }else{
                 var grd = ctx.createRadialGradient(bubbleX-radius/Math.sqrt(2),bubbleY+radius/Math.sqrt(2),2*radius-5,bubbleX+radius/Math.sqrt(2),bubbleY-radius/Math.sqrt(2),5);

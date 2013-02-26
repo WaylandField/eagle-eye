@@ -13,7 +13,7 @@ Ext.define('Kitchensink.view.CanvasView', {
             {
                 xtype:'starchart',
                 width:1024,
-                height:710
+                height:718
             }/**,
             {
                 docked: 'bottom',

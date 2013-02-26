@@ -1,37 +1,14 @@
 var db = require('../db').getDb();
-var mongo = require('../node_modules/mongojs/node_modules/mongodb');
-
-var Server = mongo.Server,
-    Db = mongo.Db,
-    BSON = mongo.BSONPure;
-
-var server = new Server('localhost', 27017, {auto_reconnect: true});
-db = new Db('eagleEyeDB', server);
-
-db.open(function(err, db) {
-    if(!err) {
-        console.log("Connected to 'eagleEyeDB' database");
-        db.collection('roles', {safe:true}, function(err, collection) {
-            if (err) {
-                console.log("The 'roles' collection doesn't exist. Creating it with sample data...");
-            }
-        });
-    }
-});
 
 exports.getAllRoles = function(callback) {
-    db.collection('roles', function(err, collection) {
-        collection.find().toArray(function(err, roles) {
-            callback.call(callback, roles);
-        });
+    db.roles.find({}, function(err, roles) {
+        callback.call(callback, roles);
     });
 };
 
 exports.getRoles = function(query, callback) {
-    db.collection('roles', function(err, collection) {
-        collection.find(query, function(err, roles) {
-            callback.call(callback, roles);
-        });
+    db.roles.find(query, function(err, roles) {
+        callback.call(callback, roles);
     });
 };
 
@@ -72,7 +49,7 @@ exports.insertRoles=function()
     for(var i=0;i<20;i++)
 	{   
 	    var roleId= "role" + i;
-		var roleName= roleNameList[i%10]
+		var roleName= roleNameList[i%10];
 		var latitude= latitudelist[i%3];
 		var longtitude = longtitudelist[i%3];
 		var userId ="user"+i;
@@ -94,4 +71,4 @@ exports.insertRoles=function()
 	}
     });
 	
-}
+};
