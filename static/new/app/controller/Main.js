@@ -20,8 +20,9 @@ Ext.define('Kitchensink.controller.Main', {
             main: 'mainview',
             toolbar: '#mainNavigationBar',
             launchscreen : "#launchscreen",
-            sourceButton: 'button[action=viewSource]',
+            mapButton: 'button[action=showMap]',
             canvas : '#launchscreen',
+            popupDialog:'#popupDialog',
 
             sourceOverlay: {
                 selector: 'sourceoverlay',
@@ -31,8 +32,8 @@ Ext.define('Kitchensink.controller.Main', {
         },
 
         control: {
-            sourceButton: {
-                tap: 'onSourceTap'
+            mapButton: {
+                tap: 'onMapTap'
             },
             nav: {
                 select: 'onNavTap'
@@ -120,29 +121,10 @@ Ext.define('Kitchensink.controller.Main', {
     /**
      * Shows the source code for the {@link #currentDemo} in an overlay
      */
-    onSourceTap: function() {
-        var overlay = this.getSourceOverlay(),
-            demo    = this.getCurrentDemo();
+    onMapTap: function() {
+        var popup = this.getPopupDialog();
+        popup.show();
 
-        if (!overlay.getParent()) {
-            Ext.Viewport.add(overlay);
-        }
-        overlay.show();
-        overlay.setMasked({
-            xtype: 'loadmask',
-            message: 'Loading...'
-        });
-
-        if (demo) {
-            Ext.Ajax.request({
-                url: 'app/view/' + (demo.get('view') || demo.get('text')) + '.js',
-
-                callback: function(request, success, response) {
-                    overlay.setHtml(response.responseText);
-                    overlay.unmask();
-                }
-            });
-        }
     },
 
     /**
