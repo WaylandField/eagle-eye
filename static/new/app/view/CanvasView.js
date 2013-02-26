@@ -36,7 +36,7 @@ Ext.define('Kitchensink.view.CanvasView', {
                 hideOnMaskTap: true,
 
                 // Make it hidden by default
-                hidden: false,
+                hidden: true,
                 border:false,
 
                 // Set the width and height of the panel
@@ -57,10 +57,10 @@ Ext.define('Kitchensink.view.CanvasView', {
         toolbar.setTitle("Direct Reports Target Role Distribution @ Shanghai");
         toolbar.add({
             xtype : 'button',
-            id: 'viewSourceButton',
+            id: 'mapbutton',
             align : 'right',
             ui    : 'action',
-            action: 'viewSource',
+            action: 'showMap',
             text:'Map'
         });
 
