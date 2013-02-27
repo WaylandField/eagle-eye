@@ -12,25 +12,17 @@ exports.getRoles = function(query, callback) {
     });
 };
 
-exports.getRolesByRoleId = function(req, res) {
-	 var roleId = req.params.roleId;
-	    console.log('Retrieving role roleId: ' + roleId);
-	    db.collection('roles', function(err, collection) {
-	        collection.find({'roleId':roleId}, function(err, item) {
-	          res.send(item);     			
-	        });
-	    });
-};
-
-exports.getRolesByUserId = function(id, callback){
-    var result = [];
-    db.roles.find({'userId':id},function(err, roles){
-        roles.forEach(function(role){
-            result.push(role);
+exports.getUsersCountOfRole = function(query, callback)
+{
+	 var iCount = 0;
+     db.roles.find(query, function(err, roles){
+        roles.forEach(function(users){
+			iCount++;
+			console.log('count:' +iCount);
         });
-        callback.call(callback, result);
+        callback.call(callback, iCount);
     });
-};
+}
 
 exports.insertRoles=function()
 {
@@ -45,7 +37,6 @@ exports.insertRoles=function()
 	var labelList = new Array("complete","Not Ready");
 	var startDateList = new Array("01/02/2006","01/02/2007","01/02/2008","01/02/2009","01/02/2010","01/02/2011","01/02/2012");
 	var endDateList = new Array("01/02/2008","01/02/2008","01/02/2010","01/02/2010","01/02/2011","01/02/2012","01/02/2013");
-	db.collection('roles', function(err, collection) {01
     for(var i=0;i<20;i++)
 	{   
 	    var roleId= "role" + i;
@@ -67,8 +58,7 @@ exports.insertRoles=function()
 
        var query = {"roleId":roleId,"roleName":roleName,"latitude":latitude,"longtitude":longtitude,"users":[{"userId":userId,"username":userName,"photo":photo,"competency":[{"compName":compName,"readiness":readiness,"Learning":[{"learningName":learningName,"label":label}]}],"PositionHistory":[{"roleName":positionRoleName,"startDate":startDate,"endDate":endDate}]}]};
 		console.log('Retrieving role: ' + JSON.stringify(query));
-    	collection.insert(query, {safe:true}, function(err, result) {});
+    	db.roles.insert(query, {safe:true}, function(err, result) {});
 	}
-    });
 	
 };
