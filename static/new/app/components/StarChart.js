@@ -24,10 +24,22 @@ Ext.define('Kitchensink.components.StarChart',{
         this.COLOR_INDEX=0;
     },
     paint: function(){
-        this._roles = this._store.randomMockData();
-        this._groups = Kitchensink.util.Utils.kmeans(this._roles, 'count', 5);
-        this._prepareData();
-        this._drawGraph();
+        var that = this;
+        var oper = {
+            'action':'read',
+            'filters':[Ext.create('Ext.util.Filter', {
+                property: 'latitude',
+                value   : 12306
+            })],
+            'limit':20,
+            'callback':function(records, operation, success){
+                that._roles = records;//that._store.randomMockData();
+                that._groups = Kitchensink.util.Utils.kmeans(that._roles, 'getCount', 5);
+                that._prepareData();
+                that._drawGraph();
+            }
+        };
+        this._store.load(oper);
     },
     _getBubbleR : function(count, min){
         return min?(count>this.MIN_GAP?count:this.MIN_GAP):count;
@@ -125,8 +137,9 @@ Ext.define('Kitchensink.components.StarChart',{
         var group;
         for(var i=0;i<groups.length;i++){
             group=groups[i];
+            if(group.length<=0) continue;
             degree = this._getStartDegree();
-            r = this._getBubbleR(group[0].count, true);
+            r = this._getBubbleR(group[0].getCount(), true);
             if(i===0){
                 if((group&&group.length<2||group.length>3)){
                     globalR = 0;
@@ -146,7 +159,7 @@ Ext.define('Kitchensink.components.StarChart',{
                     if(this.degreeCrossed>=360){
                         this.degreeCrossed=0;
                         degree = this._getStartDegree();
-                        r=this._getBubbleR(group[j].count, true);
+                        r=this._getBubbleR(group[j].getCount(), true);
                         globalR = globalBorder+5;
                         globalBorder+=5+r;
                     }
@@ -252,12 +265,12 @@ Ext.define('Kitchensink.components.StarChart',{
             ctx.font="bold 15pt Calibri";
             ctx.shadowColor="black";
             ctx.shadowBlur = 10;
-            ctx.fillText(data.count,bubbleX,bubbleY);
+            ctx.fillText(data.getCount(),bubbleX,bubbleY);
             ctx.fillStyle="#ffffff";
             ctx.font="normal 10pt Calibri";
             ctx.shadowColor="black";
             ctx.shadowBlur = 6;
-            ctx.fillText(data.name,bubbleX, bubbleY+10);
+            ctx.fillText(data.get('roleName'),bubbleX, bubbleY+10);
         }
     },
 /**    _drawGraph1 : function(){

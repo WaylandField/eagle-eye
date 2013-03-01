@@ -5,7 +5,7 @@ function kmeans( arrayToProcess,key, Clusters ){
   var changed = false;
 
   // order the input array
-  arrayToProcess.sort(function(a,b){return b[key] - a[key];});  
+  arrayToProcess.sort(function(a,b){return getKey(b, key) - getKey(a,key);});  
   
   // initialise group arrays
   for( initGroups=0; initGroups < Clusters; initGroups++ )
@@ -20,7 +20,7 @@ function kmeans( arrayToProcess,key, Clusters ){
   for( i=0; i<Clusters; i++ )
   {
   
-    Centroids[i]=arrayToProcess[ (initialCentroids*(i+1)) ][key];
+    Centroids[i]=getKey(arrayToProcess[ (initialCentroids*(i+1)) ], key);
   
   }
   
@@ -45,7 +45,7 @@ function kmeans( arrayToProcess,key, Clusters ){
  	  for( j=0; j<Clusters; j++ )
 	  {
 	  
-        distance = Math.abs( Centroids[j]-arrayToProcess[i][key] );	
+        distance = Math.abs( Centroids[j]-getKey(arrayToProcess[i],key) );	
 		
 		if ( oldDistance==-1 )
 		{
@@ -105,6 +105,17 @@ function kmeans( arrayToProcess,key, Clusters ){
   while( changed==true );
   
   return Groups;
+
+  function getKey(obj, key){
+      if(obj.key){
+          if(typeof obj.key === 'function'){
+              return obj.key.call(obj);
+          }else{
+              return obj.key;
+          }
+      }
+      return 0;
+  }
   
 }
 

@@ -123,7 +123,7 @@ Ext.define('Kitchensink.controller.Main', {
      */
     onMapTap: function() {
         var popup = this.getPopupDialog();
-        popup.show();
+        popup.showBy(this.getMapButton());
 
     },
 

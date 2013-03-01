@@ -63,8 +63,6 @@ Ext.define('Kitchensink.view.CanvasView', {
             action: 'showMap',
             text:'Map'
         });
-
-        
     }
     
 });

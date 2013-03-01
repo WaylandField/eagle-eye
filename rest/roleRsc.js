@@ -2,6 +2,7 @@ module.exports = function(app, options){
     var dao = require('../dao/roleDao');
 	
 	app.get('/api/role', function(req, res){
+        console.log("jjj"+req.params);
         dao.getAllRoles(function(records){
             res.send(records);
         });

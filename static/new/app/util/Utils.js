@@ -5,9 +5,10 @@ kmeans: function( arrayToProcess, key, Clusters ){
   var Centroids = new Array();
   var oldCentroids = new Array();
   var changed = false;
-
+    
   // order the input array
-  arrayToProcess.sort(function(a,b){return b[key] - a[key];});  
+  that = this;
+  arrayToProcess.sort(function(a,b){return that.getKey(b, key) - that.getKey(a,key);});
   
   // initialise group arrays
   for( initGroups=0; initGroups < Clusters; initGroups++ )
@@ -22,7 +23,7 @@ kmeans: function( arrayToProcess, key, Clusters ){
   for( i=0; i<Clusters; i++ )
   {
   
-    Centroids[i]=arrayToProcess[ (initialCentroids*(i+1)) ][key];
+    Centroids[i]=this.getKey(arrayToProcess[ (initialCentroids*(i+1)) ],key);
   
   }
   
@@ -47,7 +48,7 @@ kmeans: function( arrayToProcess, key, Clusters ){
  	  for( j=0; j<Clusters; j++ )
 	  {
 	  
-        distance = Math.abs( Centroids[j]-arrayToProcess[i][key] );	
+        distance = Math.abs( Centroids[j]-this.getKey(arrayToProcess[i], key) );	
 		
 		if ( oldDistance==-1 )
 		{
@@ -81,7 +82,7 @@ kmeans: function( arrayToProcess, key, Clusters ){
 	  for( i=0; i<Groups[j].length; i++ )
 	  {
 	  
-	    total+=Groups[j][i][key];
+	    total+=this.getKey(Groups[j][i],key);
 	  
 	  } 
 	
@@ -109,6 +110,17 @@ kmeans: function( arrayToProcess, key, Clusters ){
   return Groups;  
 },
 //kmeans ends here
+
+    getKey: function(obj, key){
+        if(obj[key]){
+            if(typeof obj[key] === 'function'){
+                return obj[key].call(obj);
+            }else{
+                return obj[key];
+            }
+        }
+        return 0;
+    },
 
 simpleGroup : function(arrayToProcess, key,  clusters){
     // sort data array

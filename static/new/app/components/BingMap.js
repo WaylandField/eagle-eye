@@ -24,7 +24,9 @@ Ext.define('Kitchensink.components.BingMap',{
         var center = map.getCenter();
         
         // Add a pin to the center of the map
-        var pin = new Microsoft.Maps.Pushpin(center, {text: '123'}); 
+        var pin = new Microsoft.Maps.Pushpin(center, {text: '123',
+                                                      htmlContent:'<a href="#"><font color="red">fefe</font></a>'
+}); 
 
         // Create the infobox for the pushpin
         pinInfobox = new Microsoft.Maps.Infobox(pin.getLocation(), 
@@ -36,7 +38,7 @@ Ext.define('Kitchensink.components.BingMap',{
                                                  offset: new Microsoft.Maps.Point(0,15)});
 
         // Add the pushpin and infobox to the map
-//        map.entities.push(pin);
+        map.entities.push(pin);
         map.entities.push(pinInfobox);
 
     }
