@@ -26,11 +26,12 @@ Ext.define('Kitchensink.components.StarChart',{
     },
     onTap: function(e){
         var x = e.pageX;
-        var y = e.pageY;
+        var y = e.pageY-50;
         var temp = 0, temp1=null, closestBubble;
         for(var i=0;i<this._bubbles.length;i++){
             var bub = this._bubbles[i];
             temp=(bub.pos.x-x)*(bub.pos.x-x)+(bub.pos.y-y)*(bub.pos.y-y);
+            if(temp>400) continue;
             if(temp1==null){
                 temp1=temp;
             }
@@ -39,7 +40,9 @@ Ext.define('Kitchensink.components.StarChart',{
                 closestBubble = bub;
             }
         }
-        alert(closestBubble.data.get('roleName')+"-"+x+"-"+y);
+        if(closestBubble){
+            this.fireEvent('roleSelected', closestBubble.data);
+        }
     },
     paint: function(){
         var that = this;
@@ -216,7 +219,7 @@ Ext.define('Kitchensink.components.StarChart',{
             var ctx = canvas.getContext('2d');  
         }
         var titleArray = [];
-        var x=canvas.width/2,y=canvas.height/2;
+        var x=canvas.height/2,y=canvas.height/2;
         var color_i=0;
         ctx.clearRect(0,0,canvas.width,canvas.height);
         var orbit = this._borders;

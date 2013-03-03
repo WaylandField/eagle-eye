@@ -4,9 +4,9 @@
 	id: 'UserListStore',
 	requires: ['Kitchensink.model.User'],
 	config : {
-	    model: 'Kitchensink.model.User',
+	    model: 'Kitchensink.model.User'/**,
 	    grouper: function(record) {
-	        return record.get('firstName')[0];
+	        return record.get('username')[0];
 	    },
 	    data: [
 	        {firstName: 'Julio', lastName: 'Benesh','color':'#ff0000','ready':'75%'},
@@ -16,7 +16,7 @@
 	        {firstName: 'Nelson', lastName: 'Raber','color':'#ff00ff','ready':'28%'},
 	        {firstName: 'Tyrone', lastName: 'Scannell','color':'#00ffff','ready':'22%'},
 	        {firstName: 'Allan', lastName: 'Disbrow','color':'#669911','ready':'12%'}
-	    ]
+	    ]**/
 	}
 });
 })();

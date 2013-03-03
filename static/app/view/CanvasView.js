@@ -11,6 +11,7 @@ Ext.define('Kitchensink.view.CanvasView', {
 	    },
 	    items: [
             {
+                id:'roleChart',
                 xtype:'starchart',
                 width:1024,
                 height:718
@@ -45,8 +46,6 @@ Ext.define('Kitchensink.view.CanvasView', {
 
                 // Insert a title docked at the top with a title
                 items: [
-                    {xtype:'bingmap',
-                    border: 1}
                 ]
             }
         ]

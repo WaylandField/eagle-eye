@@ -22,7 +22,7 @@ Ext.application({
     //loads the views used by the app from the app/view folder
     views: [
         //component demos
-        'CanvasView', 'RoleChart', 'RoleView', 'UserChart',
+        'CanvasView', 'RoleChart', 'RoleView', 'UserChart', 'OrgChartView',
         'UserDetailView', 'UserSlider', 'UserView','UserCarousel'
     ],
 

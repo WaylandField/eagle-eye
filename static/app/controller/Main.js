@@ -21,7 +21,7 @@ Ext.define('Kitchensink.controller.Main', {
             toolbar: '#mainNavigationBar',
             launchscreen : "#launchscreen",
             mapButton: 'button[action=showMap]',
-            canvas : '#launchscreen',
+            roleChart : '#roleChart',
             popupDialog:'#popupDialog',
 
             sourceOverlay: {
@@ -38,8 +38,8 @@ Ext.define('Kitchensink.controller.Main', {
             nav: {
                 select: 'onNavTap'
             },
-            canvas : {
-            	tap: 'onRoleTap'
+            roleChart : {
+            	roleSelected: 'onRoleSelected'
             }
         },
 
@@ -49,7 +49,8 @@ Ext.define('Kitchensink.controller.Main', {
             'report/:id': 'showReportById',
             'role/:id':'showReportById',
             'user/:id':'showUserById',
-            'cool/:id':'showCarouselById'
+            'cool/:id':'showCarouselById',
+            'org/:id':'showOrgChart'
             
         },
 
@@ -115,6 +116,18 @@ Ext.define('Kitchensink.controller.Main', {
     		return jj[t];
     	}});
     },
+    showOrgChart: function(){
+        this.showView({get:function(t){
+            var jj = {
+                view:'OrgChartView',
+                'animation' : {
+                    type:'slide',
+                    Direction:'up'
+                }
+            };
+            return jj[t];
+        }});
+    },
 
     
 
@@ -123,8 +136,29 @@ Ext.define('Kitchensink.controller.Main', {
      */
     onMapTap: function() {
         var popup = this.getPopupDialog();
+        popup.setSize(550, 400);
+        popup.setItems([
+            {xtype:'bingmap',
+             border: 1}
+        ]);
         popup.showBy(this.getMapButton());
 
+    },
+
+    onRoleSelected: function(role){
+        var popup = this.getPopupDialog();
+        popup.setSize(200, 600);
+        popup.setRight(0);
+        popup.setTop(0);
+        popup.setItems([
+            {
+                xtype:'list',
+                itemTpl:'{username}',
+                model:'Kitchensink.model.User',
+                data:role.data.users
+            }
+        ]);
+        popup.show();
     },
 
     /**
