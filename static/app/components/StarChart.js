@@ -92,7 +92,7 @@ Ext.define('Kitchensink.components.StarChart',{
         for(var i=0;i<groups.length;i++){
             group=groups[i];
             degree = this._getStartDegree();
-            r = this._getBubbleR(group[0].count, true);
+            r = this._getBubbleR(group[0].getCount(), true);
             if(i===0){
                 if((group&&group.length<2||group.length>3)){
                     globalR = 0;
@@ -112,7 +112,7 @@ Ext.define('Kitchensink.components.StarChart',{
                     if(this.degreeCrossed>=360){
                         this.degreeCrossed=0;
                         degree = this._getStartDegree();
-                        r=this._getBubbleR(group[j].count, true);
+                        r=this._getBubbleR(group[j].getCount(), true);
                         globalR = globalBorder+5;
                         globalBorder+=5+r;
                     }
@@ -124,7 +124,7 @@ Ext.define('Kitchensink.components.StarChart',{
                     curPos = {
                         x:x, 
         			    y:y, 
-        			    r: this._getBubbleR(group[j].count)
+        			    r: this._getBubbleR(group[j].getCount())
                     };
                     for(var k=0;k<this._bubbles.length;k++){
                         pos = this._bubbles[k].pos;
@@ -192,7 +192,7 @@ Ext.define('Kitchensink.components.StarChart',{
                     curPos = {
                         x:x, 
         			    y:y, 
-        			    r: this._getBubbleR(group[j].count)
+        			    r: this._getBubbleR(group[j].getCount())
                     };
                     for(var k=0;k<this._bubbles.length;k++){
                         pos = this._bubbles[k].pos;
@@ -265,8 +265,8 @@ Ext.define('Kitchensink.components.StarChart',{
 //            var color = [255, 255, 255];
             var bubbleX = pos.x;
             var bubbleY = pos.y;
-            var radius = pos.r*this.inc;
-            radius = radius>2?radius:2;
+            var radius = pos.r;
+            radius = radius>4?radius:4;
 //            ctx.clearShadow();
             ctx.shadowColor='white';
             ctx.shadowBlur=3;
