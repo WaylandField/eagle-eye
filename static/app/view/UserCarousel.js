@@ -3,7 +3,7 @@ Ext.define('Kitchensink.view.UserCarousel', {
     xtype: 'userCarousel',
     requires:['Kitchensink.components.CoolCarousel'],
     config : {layout: {
-	        type: 'fit'
+	        type: 'vbox'
 	    },
 	    items: [
             {xtype:'coolCarousel'}    

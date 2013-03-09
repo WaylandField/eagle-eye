@@ -687,13 +687,13 @@ function Thumb(a, b, c, d) {
 function Data(a) {
 	function c(a) {
         // canvas_image
-		b.canvasWidth = 1024;//parseInt($(a).find("canvas_width").text());
-		b.canvasHeight = 768;//parseInt($(a).find("canvas_height").text());
-		b.centerX = 0;//parseInt($(a).find("carousel_center_x").text());
-		b.centerY = 0;//parseInt($(a).find("carousel_center_y").text());
-		b.radiusX = 500;//parseInt($(a).find("radius_x").text());
-		b.radiusY = 150;//parseInt($(a).find("radius_y").text());
-		b.radiusZ = 400;//parseInt($(a).find("radius_z").text());
+		b.canvasWidth = parseInt($(a).find("canvas_width").text());
+		b.canvasHeight = parseInt($(a).find("canvas_height").text());
+		b.centerX = parseInt($(a).find("carousel_center_x").text());
+		b.centerY = parseInt($(a).find("carousel_center_y").text());
+		b.radiusX = parseInt($(a).find("radius_x").text());
+		b.radiusY = parseInt($(a).find("radius_y").text());
+		b.radiusZ = parseInt($(a).find("radius_z").text());
 		b.carouselAngle = parseInt($(a).find("carousel_rotation_angle").text());
 		b.backThumbTransparency = $(a).find("back_thumb_transparency").text();
 		b.backgroundColor = $(a).find("background_color").text();

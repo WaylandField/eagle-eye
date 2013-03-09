@@ -1,27 +1,27 @@
 
 <settings>
 <!--    GENERAL SETTINGS    -->
-<canvas_width>729</canvas_width>
-<canvas_height>600</canvas_height>
-<carousel_center_x>400</carousel_center_x>
-<carousel_center_y>250</carousel_center_y>
-<image_width>146</image_width>
-<image_height>220</image_height>
-<radius_x>300</radius_x>
-<radius_y>100</radius_y>
-<radius_z>150</radius_z>
+<canvas_width>1024</canvas_width>
+<canvas_height>400</canvas_height>
+<carousel_center_x>0</carousel_center_x>
+<carousel_center_y>0</carousel_center_y>
+<image_width>180</image_width>
+<image_height>240</image_height>
+<radius_x>500</radius_x>
+<radius_y>150</radius_y>
+<radius_z>550</radius_z>
 <carousel_rotation_angle>0</carousel_rotation_angle>
 <back_thumb_transparency>0.4</back_thumb_transparency>
 <auto_play>no</auto_play>
 <enable_mouse_wheel>yes</enable_mouse_wheel>
 <slideshow_delay>3.5</slideshow_delay>
-<background_color>#000000</background_color>
+<background_color>#ffffff</background_color>
 <preloader_path>resources/testdata/graphics/preloader.png</preloader_path>
 <preloader_size>32</preloader_size>
 <preloader_color>#FFFFFF</preloader_color>
 <!--    THUMBS SETTINGS    -->
 <border_size>5</border_size>
-<border_color>#FFFFFF</border_color>
+<border_color>#000000</border_color>
 <tooltip_font>Verdana</tooltip_font>
 <tooltip_text_size>14</tooltip_text_size>
 <tooltip_text_color>#000000</tooltip_text_color>
