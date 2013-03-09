@@ -655,6 +655,7 @@ function Thumb(a, b, c, d) {
 		ctx
 				.drawImage(this.imgContainer.cacheCanvas, 0, 0, d + f * 2, e
 						+ f * 2);
+        ctx.
 		ctx.restore();
 		ctx.globalCompositeOperation = "destination-out";
 		gradient = ctx.createLinearGradient(0, 0, 0, g);

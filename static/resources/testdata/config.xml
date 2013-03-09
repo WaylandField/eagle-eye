@@ -72,66 +72,82 @@
 <image>
 <image_path>resources/testdata/images/1.jpg</image_path>
 <text>This is image 1!</text>
+<url>1</url>
 </image>
 <image>
 <image_path>resources/testdata/images/1.jpg</image_path>
 <text>This is image 1!</text>
+<url>1</url>
 </image>
 <image>
 <image_path>resources/testdata/images/1.jpg</image_path>
 <text>This is image 1!</text>
+<url>1</url>
 </image>
 <image>
 <image_path>resources/testdata/images/1.jpg</image_path>
 <text>This is image 1!</text>
+<url>1</url>
 </image>
 <image>
 <image_path>resources/testdata/images/1.jpg</image_path>
 <text>This is image 1!</text>
+<url>1</url>
 </image>
 <image>
 <image_path>resources/testdata/images/1.jpg</image_path>
 <text>This is image 1!</text>
+<url>1</url>
 </image>
 <image>
 <image_path>resources/testdata/images/1.jpg</image_path>
 <text>This is image 1!</text>
+<url>1</url>
 </image>
 <image>
 <image_path>resources/testdata/images/1.jpg</image_path>
 <text>This is image 1!</text>
+<url>1</url>
 </image>
 <image>
 <image_path>resources/testdata/images/1.jpg</image_path>
 <text>This is image 1!</text>
+<url>1</url>
 </image>
 <image>
 <image_path>resources/testdata/images/2.jpg</image_path>
 <text>This is image 2!</text>
+<url>1</url>
 </image>
 <image>
 <image_path>resources/testdata/images/3.jpg</image_path>
 <text>This is image 3!</text>
+<url>1</url>
 </image>
 <image>
 <image_path>resources/testdata/images/4.jpg</image_path>
 <text>This is image 4!</text>
+<url>1</url>
 </image>
 <image>
 <image_path>resources/testdata/images/5.jpg</image_path>
 <text>This is image 5!</text>
+<url>1</url>
 </image>
 <image>
 <image_path>resources/testdata/images/6.jpg</image_path>
 <text>This is image 6!</text>
+<url>1</url>
 </image>
 <image>
 <image_path>resources/testdata/images/7.jpg</image_path>
 <text>This is image 7!</text>
+<url>1</url>
 </image>
 <image>
 <image_path>resources/testdata/images/8.jpg</image_path>
 <text>This is image 8!</text>
+<url>1</url>
 </image>
 </images>
 </settings>
