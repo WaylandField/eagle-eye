@@ -337,8 +337,31 @@ this.mouseY=null};a._updateMousePosition=function(b,a){var c=this.canvas;do b-=c
 this._getObjectsUnderPoint(this.mouseX,this.mouseY,null,true,this._mouseOverIntervalID?3:1)==this._activeMouseTarget)this._activeMouseTarget.onClick(new MouseEvent("onClick",this.mouseX,this.mouseY,this._activeMouseTarget,b));this._activeMouseEvent=this._activeMouseTarget=null};a._handleMouseDown=function(b){if(this.onMouseDown)this.onMouseDown(new MouseEvent("onMouseDown",this.mouseX,this.mouseY,this,b));var a=this._getObjectsUnderPoint(this.mouseX,this.mouseY,null,this._mouseOverIntervalID?3:1);
 if(a){if(a.onPress instanceof Function&&(b=new MouseEvent("onPress",this.mouseX,this.mouseY,a,b),a.onPress(b),b.onMouseMove||b.onMouseUp))this._activeMouseEvent=b;this._activeMouseTarget=a}};a._testMouseOver=function(){if(!(this.mouseX==this._mouseOverX&&this.mouseY==this._mouseOverY&&this.mouseInBounds)){var b=null;if(this.mouseInBounds)b=this._getObjectsUnderPoint(this.mouseX,this.mouseY,null,3),this._mouseOverX=this.mouseX,this._mouseOverY=this.mouseY;if(this._mouseOverTarget!=b){if(this._mouseOverTarget&&
 this._mouseOverTarget.onMouseOut)this._mouseOverTarget.onMouseOut(new MouseEvent("onMouseOut",this.mouseX,this.mouseY,this._mouseOverTarget));if(b&&b.onMouseOver)b.onMouseOver(new MouseEvent("onMouseOver",this.mouseX,this.mouseY,b));this._mouseOverTarget=b}}};a._handleDoubleClick=function(b){if(this.onDoubleClick)this.onDoubleClick(new MouseEvent("onDoubleClick",this.mouseX,this.mouseY,this,b));var a=this._getObjectsUnderPoint(this.mouseX,this.mouseY,null,this._mouseOverIntervalID?3:1);if(a&&a.onDoubleClick instanceof
-Function)a.onDoubleClick(new MouseEvent("onPress",this.mouseX,this.mouseY,a,b))};j.Stage=c})(window);(function(j){var c=function(b){this.initialize(b)},a=c.prototype=new DisplayObject;a.image=null;a.snapToPixel=true;a.DisplayObject_initialize=a.initialize;a.initialize=function(b){this.DisplayObject_initialize();typeof b=="string"?(this.image=new Image,this.image.src=b):this.image=b};a.isVisible=function(){return this.visible&&this.alpha>0&&this.scaleX!=0&&this.scaleY!=0&&this.image&&(this.image.complete||this.image.getContext||this.image.readyState>=2)};a.DisplayObject_draw=a.draw;a.draw=function(b,
-a){if(this.DisplayObject_draw(b,a))return true;b.drawImage(this.image,0,0);return true};a.clone=function(){var b=new c(this.image);this.cloneProps(b);return b};a.toString=function(){return"[Bitmap (name="+this.name+")]"};j.Bitmap=c})(window);(function(j){var c=function(b){this.initialize(b)},a=c.prototype=new DisplayObject;a.onAnimationEnd=null;a.currentFrame=-1;a.currentAnimation=null;a.paused=true;a.spriteSheet=null;a.snapToPixel=true;a.offset=0;a.currentAnimationFrame=0;a._advanceCount=0;a._animation=null;a.DisplayObject_initialize=a.initialize;a.initialize=function(b){this.DisplayObject_initialize();this.spriteSheet=b};a.isVisible=function(){return this.visible&&this.alpha>0&&this.scaleX!=0&&this.scaleY!=0&&this.spriteSheet.complete&&
+Function)a.onDoubleClick(new MouseEvent("onPress",this.mouseX,this.mouseY,a,b))};j.Stage=c})(window);(function(j){var c=function(b){this.initialize(b)},a=c.prototype=new DisplayObject;a.image=null;a.snapToPixel=true;a.DisplayObject_initialize=a.initialize;a.initialize=function(b){this.DisplayObject_initialize();typeof b=="string"?(this.image=new Image,this.image.src=b):this.image=b};a.isVisible=function(){return this.visible&&this.alpha>0&&this.scaleX!=0&&this.scaleY!=0&&this.image&&(this.image.complete||this.image.getContext||this.image.readyState>=2)};a.DisplayObject_draw=a.draw;
+a.draw=function(b,a){
+if(this.DisplayObject_draw(b,a))return true;
+//b.drawImage(this.image,0,0);return true;
+var tcct=this.sourceRect;
+if(tcct){
+var h = this.image.height;
+var w = this.image.width;
+var ratio = h/w;
+if(ratio>tcct.height/tcct.width){
+    h = w*tcct.height/tcct.width;
+}else{
+    w = h*tcct.width/tcct.height;
+}
+b.drawImage(this.image,(this.image.width-w)/2, (this.image.height-h)/2, w, h, 0, 0, tcct.width, tcct.height)}else{
+b.drawImage(this.image,0,0);
+}
+return!0
+};
+a.clone=function(){
+var b=new c(this.image);
+this.sourceRect&&(b.sourceRect=this.sourceRect.clone());
+this.cloneProps(b);
+return b
+};a.toString=function(){return"[Bitmap (name="+this.name+")]"};j.Bitmap=c})(window);(function(j){var c=function(b){this.initialize(b)},a=c.prototype=new DisplayObject;a.onAnimationEnd=null;a.currentFrame=-1;a.currentAnimation=null;a.paused=true;a.spriteSheet=null;a.snapToPixel=true;a.offset=0;a.currentAnimationFrame=0;a._advanceCount=0;a._animation=null;a.DisplayObject_initialize=a.initialize;a.initialize=function(b){this.DisplayObject_initialize();this.spriteSheet=b};a.isVisible=function(){return this.visible&&this.alpha>0&&this.scaleX!=0&&this.scaleY!=0&&this.spriteSheet.complete&&
 this.currentFrame>=0};a.DisplayObject_draw=a.draw;a.draw=function(b,a){if(this.DisplayObject_draw(b,a))return true;this._normalizeFrame();var c=this.spriteSheet.getFrame(this.currentFrame);if(c!=null){var d=c.rect;b.drawImage(c.image,d.x,d.y,d.width,d.height,-c.regX,-c.regY,d.width,d.height);return true}};a.gotoAndPlay=function(b){this.paused=false;this._goto(b)};a.gotoAndStop=function(b){this.paused=true;this._goto(b)};a.advance=function(){this._animation?this.currentAnimationFrame++:this.currentFrame++;
 this._normalizeFrame()};a.clone=function(){var b=new c(this.spriteSheet);this.cloneProps(b);return b};a.toString=function(){return"[BitmapAnimation (name="+this.name+")]"};a._tick=function(b){var a=this._animation?this._animation.frequency:1;b&&!this.paused&&(++this._advanceCount+this.offset)%a==0&&this.advance()};a._normalizeFrame=function(){var b=this._animation;if(b)if(this.currentAnimationFrame>=b.frames.length){if(b.next?this._goto(b.next):(this.paused=true,this.currentAnimationFrame=b.frames.length-
 1,this.currentFrame=b.frames[this.currentAnimationFrame]),this.onAnimationEnd)this.onAnimationEnd(this,b.name)}else this.currentFrame=b.frames[this.currentAnimationFrame];else if(this.currentFrame>=this.spriteSheet.getNumFrames()&&(this.currentFrame=0,this.onAnimationEnd))this.onAnimationEnd(this,null)};a.DisplayObject_cloneProps=a.cloneProps;a.cloneProps=function(b){this.DisplayObject_cloneProps(b);b.onAnimationEnd=this.onAnimationEnd;b.currentFrame=this.currentFrame;b.currentAnimation=this.currentAnimation;
@@ -624,8 +647,10 @@ function Thumb(a, b, c, d) {
 	this.bg = new Shape;
 	this.imgH = 0;
 	this.setImage = function(a, b, c) {
-		var d = a.image.width;
-		var e = a.image.height;
+		var d = b.thumbWidth;
+		var e = b.thumbHeight;
+//		var d = a.image.width;
+//		var e = a.image.height;
 		this.imgH = e;
 		var f = b.borderSize;
 		this.bg = new Shape;
@@ -637,6 +662,13 @@ function Thumb(a, b, c, d) {
 		a.x = f;
 		a.y = f;
 		this.imgContainer.addChild(a);
+
+        this.txt = new Text(this.text, "17px Arial", "#000");
+        this.txt.x =1;
+        this.txt.y = e;
+        this.txt.shadow = new Shadow("#fff", 0, 0, 5);
+        this.imgContainer.addChild(this.txt);
+
 		this.container.addChild(this.imgContainer);
 		this.imgContainer.cache(0, 0, d + f * 2, e + f * 2);
 		var g = b.reflHeight;
@@ -673,8 +705,8 @@ function Thumb(a, b, c, d) {
 			this.imgContainer.cache(0, 0, d + f * 2, e + f * 2 + g
 					+ b.reflDistance)
 		}
-		this.width = a.image.width + f * 2;
-		this.height = a.image.height + f * 2;
+        this.width = b.thumbWidth + f*2;
+        this.height = b.thumbHeight + f*2;
 		this.imageWidth = this.width;
 		this.imageHeight = this.height
 	};
@@ -966,13 +998,15 @@ function DemoCanvasCarousel(a, b) {
 		J.redOffset = 1;
 		J.greenOffset = 1;
 		J.blueOffset = 1
+        parent.fireEvent('selected', q[a]);
+
 	}
 	function bM(a) {
 		var b = a.target.id;
 		if (e&&b) {
 			if (b != j) {
 				bN(b)
-                parent.fireEvent('selected', q[b]);
+//                parent.fireEvent('selected', q[b]);
 //			} else {
 //				window.open(q[b].url, "_blank")
  		    }
@@ -1095,7 +1129,7 @@ function DemoCanvasCarousel(a, b) {
 			ba.container.onMouseOver = bK;
 			ba.container.onMouseOut = bL;
 			ba.container.onClick = bM;
-            ba.container.onTouchStart = bM;
+//            ba.container.onTouchStart = bM;
 //            ba.container.onSwipe = bM;
 			a += 100;
 		}
@@ -1107,6 +1141,7 @@ function DemoCanvasCarousel(a, b) {
 	}
 	function bH() {
 		var b = new Bitmap(Z);
+        b.sourceRect = new Rectangle(0, 0 , bc.thumbWidth,bc.thumbHeight);
 		q[l].setImage(b, bc, a);
 		l++;
 		bG()
@@ -1543,11 +1578,11 @@ function DemoCanvasCarousel(a, b) {
 		Ticker.addListener(c)
 	}
 	function bl() {
-		t.mouseEnabled = false;
-		v.mouseEnabled = false;
-		R.mouseEnabled = false;
-		Q.mouseEnabled = false;
-		S.mouseEnabled = false;
+		if(t)t.mouseEnabled = false;
+		if(v)v.mouseEnabled = false;
+		if(R)R.mouseEnabled = false;
+		if(Q)Q.mouseEnabled = false;
+		if(S)S.mouseEnabled = false;
 		if (g) {
 			clearTimeout(x);
 			Tween.get(I, {
@@ -1558,11 +1593,11 @@ function DemoCanvasCarousel(a, b) {
 		}
 	}
 	function bk() {
-		t.mouseEnabled = true;
-		v.mouseEnabled = true;
-		R.mouseEnabled = true;
-		Q.mouseEnabled = true;
-		S.mouseEnabled = true;
+		if(t)t.mouseEnabled = true;
+		if(v)v.mouseEnabled = true;
+		if(R)R.mouseEnabled = true;
+		if(Q)Q.mouseEnabled = true;
+		if(S)S.mouseEnabled = true;
 		if (g) {
 			bt()
 		}
@@ -1666,10 +1701,10 @@ function DemoCanvasCarousel(a, b) {
 		t = new Container;
 		s.addChild(t);
         // canvas main size
-		K.centerX = 512;
-		K.centerY = 100;
-		bc.centerX = 512;
-		bc.centerY = 100;
+		K.centerX = bc.centerX;
+		K.centerY = bc.centerY;
+		bc.centerX = bc.centerX;
+		bc.centerY = bc.centerY;
 		K.carouselAngle = bc.carouselAngle;
 		_.src = bc.preloaderPath;
 		_.onload = bm;

@@ -25,7 +25,7 @@ Ext.define('Kitchensink.view.phone.Main', {
             {
                 id: 'mainNavigationBar',
                 xtype : 'titlebar',
-                docked: 'top',
+                docked: 'bottom',
                 title : 'Eagle Eyes'
             },
             {

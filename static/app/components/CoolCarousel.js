@@ -2,10 +2,10 @@ Ext.define('Kitchensink.components.CoolCarousel',{
     extend:'Ext.Component',
     xtype:'coolCarousel',
 	template: [{tag : 'canvas',
-		reference: 'starchart',
+		reference: 'carouselchart',
         cls:'coolCarousel',
         width:1024,
-        height:768,
+        height:350,
         id : 'myCanvas'
 	}],
     requires : ['Kitchensink.util.CoolCarousel'],
@@ -18,16 +18,15 @@ Ext.define('Kitchensink.components.CoolCarousel',{
         });
      },
      onPainted : function(){
+         var that = this;
      // todo add your logic here
          this.carousel = new Kitchensink.util.CoolCarousel();
          this.carousel.create('myCanvas','resources/testdata/config.xml');
          this.carousel.on(
              'selected', function(arg1, arg2){
+                 that.fireEvent('selected', arg1);
                  console.log(arg1);
-                 console.log(arg2);
-                 alert('jiji');
              }
          );
-
      }
 });

@@ -219,7 +219,7 @@ Ext.define('Kitchensink.components.StarChart',{
             var ctx = canvas.getContext('2d');  
         }
         var titleArray = [];
-        var x=canvas.height/2,y=canvas.height/2;
+        var x=canvas.width/2,y=canvas.height/2;
         var color_i=0;
         ctx.clearRect(0,0,canvas.width,canvas.height);
         var orbit = this._borders;
@@ -242,7 +242,8 @@ Ext.define('Kitchensink.components.StarChart',{
         
         var circles = this._bubbles;
         var offset = this._getOffset();
-        ctx.strokeStyle="rgba(31,55,79,1)";
+//        ctx.strokeStyle="rgba(31,55,79,1)";
+        ctx.strokeStyle="rgba(255,255,255,1)";
         ctx.clearShadow();
         for(var i=0;i<circles.length;i++){
             var pos = circles[i].pos;
