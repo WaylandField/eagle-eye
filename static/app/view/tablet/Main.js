@@ -25,7 +25,7 @@ Ext.define('Kitchensink.view.tablet.Main', {
             {
                 id: 'mainNavigationBar',
                 xtype : 'titlebar',
-                docked: 'bottom',
+                docked: 'top',
                 title : 'Eagle Eyes'
             },
             {

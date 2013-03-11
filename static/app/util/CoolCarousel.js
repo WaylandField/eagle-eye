@@ -1,5 +1,10 @@
 Ext.define('Kitchensink.util.CoolCarousel',{
     extend: 'Ext.Component',
+    gotoItem: function(index){
+        if(this.carousel){
+            this.carousel.gotoItem(index);
+        }
+    },
     create : function(a, b){
         var parent = this;
 
@@ -663,10 +668,10 @@ function Thumb(a, b, c, d) {
 		a.y = f;
 		this.imgContainer.addChild(a);
 
-        this.txt = new Text(this.text, "17px Arial", "#000");
+        this.txt = new Text(this.text, "17px Arial", "#fff");
         this.txt.x =1;
-        this.txt.y = e;
-        this.txt.shadow = new Shadow("#fff", 0, 0, 5);
+        this.txt.y = e-10;
+        this.txt.shadow = new Shadow("#000", 0, 0, 5);
         this.imgContainer.addChild(this.txt);
 
 		this.container.addChild(this.imgContainer);
@@ -1916,14 +1921,17 @@ function DemoCanvasCarousel(a, b) {
 			bU(300, 0, 150, 0, -50, 0, 1, true, true);
 			break;
 		}
-	}
+	};
+    this.gotoItem = function(i){
+        bN(i);
+    }
 }
 TransitionPreloader.prototype = new Shape;
 TransitionPreloader.prototype.constructor = TransitionPreloader;
 ScrollBar.prototype = new Container;
 ScrollBar.prototype.constructor = ScrollBar;
-
-        return new DemoCanvasCarousel(a, b);
+        this.carousel = new DemoCanvasCarousel(a, b);
+        return this.carousel;
 
     }
 });

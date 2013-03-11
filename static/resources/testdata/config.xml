@@ -2,9 +2,9 @@
 <settings>
 <!--    GENERAL SETTINGS    -->
 <canvas_width>1024</canvas_width>
-<canvas_height>350</canvas_height>
+<canvas_height>300</canvas_height>
 <carousel_center_x>500</carousel_center_x>
-<carousel_center_y>80</carousel_center_y>
+<carousel_center_y>60</carousel_center_y>
 <image_width>120</image_width>
 <image_height>160</image_height>
 <radius_x>490</radius_x>
@@ -71,84 +71,214 @@
 <!--    ADD / REMOVE IMAGES FORM THE CAROUSEL    -->
 <images>
 <image>
-<image_path>resources/testdata/images/1.jpg</image_path>
-<text>1Carla K Grant</text>
+<image_path>testdata/photo/32.jpg</image_path>
+<text>Hall Xu</text>
+<url>0</url>
+</image>
+<image>
+<image_path>testdata/photo/58.jpg</image_path>
+<text>Zora Green</text>
 <url>1</url>
 </image>
 <image>
-<image_path>resources/testdata/images/1.jpg</image_path>
-<text>2Cgrant K K</text>
-<url>1</url>
+<image_path>testdata/photo/34.jpg</image_path>
+<text>Sanchez Brown</text>
+<url>2</url>
 </image>
 <image>
-<image_path>resources/testdata/images/1.jpg</image_path>
-<text>3Carla K Grant</text>
-<url>1</url>
+<image_path>testdata/photo/28.jpg</image_path>
+<text>Emilie Huang</text>
+<url>3</url>
 </image>
 <image>
-<image_path>resources/testdata/images/1.jpg</image_path>
-<text>4Carla K Grant</text>
-<url>1</url>
+<image_path>testdata/photo/40.jpg</image_path>
+<text>Hiller Baker</text>
+<url>4</url>
 </image>
 <image>
-<image_path>resources/testdata/images/1.jpg</image_path>
-<text>5Carla K Grant</text>
-<url>1</url>
+<image_path>testdata/photo/5bae55a786d9f9a5cf6bda660726231f.jpg</image_path>
+<text>lei Roman</text>
+<url>5</url>
 </image>
 <image>
-<image_path>resources/testdata/images/1.jpg</image_path>
-<text>6Carla K Grant</text>
-<url>1</url>
+<image_path>testdata/photo/92.jpg</image_path>
+<text>Sheila Baker</text>
+<url>6</url>
 </image>
 <image>
-<image_path>resources/testdata/images/1.jpg</image_path>
-<text>7Carla K Grant</text>
-<url>1</url>
+<image_path>testdata/photo/37.jpg</image_path>
+<text>lei Brown</text>
+<url>7</url>
 </image>
 <image>
-<image_path>resources/testdata/images/1.jpg</image_path>
-<text>8Carla K Grant</text>
-<url>1</url>
+<image_path>testdata/photo/15.jpg</image_path>
+<text>Sigrid Rogers</text>
+<url>8</url>
 </image>
 <image>
-<image_path>resources/testdata/images/1.jpg</image_path>
-<text>9Carla K Grant</text>
-<url>1</url>
+<image_path>testdata/photo/7.jpg</image_path>
+<text>Diana Huang</text>
+<url>9</url>
 </image>
 <image>
-<image_path>resources/testdata/images/2.jpg</image_path>
-<text>11This is image 2!</text>
-<url>1</url>
+<image_path>testdata/photo/105.jpg</image_path>
+<text>Emilie Smith</text>
+<url>10</url>
 </image>
 <image>
-<image_path>resources/testdata/images/3.jpg</image_path>
-<text>12Carla K Grant3!</text>
-<url>1</url>
+<image_path>testdata/photo/88.jpg</image_path>
+<text>Diana Richard</text>
+<url>11</url>
 </image>
 <image>
-<image_path>resources/testdata/images/4.jpg</image_path>
-<text>13Carla K Grant4!</text>
-<url>1</url>
+<image_path>testdata/photo/60.jpg</image_path>
+<text>Hiller Smith</text>
+<url>12</url>
 </image>
 <image>
-<image_path>resources/testdata/images/5.jpg</image_path>
-<text>Carla K Grant5!</text>
-<url>1</url>
+<image_path>testdata/photo/16ec8e470d3941e6662ffe2b8a778ef4.jpg</image_path>
+<text>Shirley Liu</text>
+<url>13</url>
 </image>
 <image>
-<image_path>resources/testdata/images/6.jpg</image_path>
-<text>Carla K Grant6!</text>
-<url>1</url>
+<image_path>testdata/photo/4.jpg</image_path>
+<text>Johnson Brown</text>
+<url>14</url>
 </image>
 <image>
-<image_path>resources/testdata/images/7.jpg</image_path>
-<text>Carla K Grant7!</text>
-<url>1</url>
+<image_path>testdata/photo/11.jpg</image_path>
+<text>Liz Green</text>
+<url>15</url>
 </image>
 <image>
-<image_path>resources/testdata/images/8.jpg</image_path>
-<text>Carla K Grant8!</text>
-<url>1</url>
+<image_path>testdata/photo/86.jpg</image_path>
+<text>Tom Johnson</text>
+<url>16</url>
+</image>
+<image>
+<image_path>testdata/photo/66.jpg</image_path>
+<text>Garcia Black</text>
+<url>17</url>
+</image>
+<image>
+<image_path>testdata/photo/35.jpg</image_path>
+<text>Sigrid Green</text>
+<url>18</url>
+</image>
+<image>
+<image_path>testdata/photo/4634b22574105d19f00fbd8640aeb38b.jpg</image_path>
+<text>Debby Jones</text>
+<url>19</url>
+</image>
+<image>
+<image_path>testdata/photo/9.jpg</image_path>
+<text>Adams Huang</text>
+<url>20</url>
+</image>
+<image>
+<image_path>testdata/photo/85.jpg</image_path>
+<text>Tom Xu</text>
+<url>21</url>
+</image>
+<image>
+<image_path>testdata/photo/97.jpg</image_path>
+<text>Spring Johnson</text>
+<url>22</url>
+</image>
+<image>
+<image_path>testdata/photo/71.jpg</image_path>
+<text>Debby Rogers</text>
+<url>23</url>
+</image>
+<image>
+<image_path>testdata/photo/47.jpg</image_path>
+<text>Bright Richard</text>
+<url>24</url>
+</image>
+<image>
+<image_path>testdata/photo/17.jpg</image_path>
+<text>Anderson Hu</text>
+<url>25</url>
+</image>
+<image>
+<image_path>testdata/photo/65.jpg</image_path>
+<text>Rose Brown</text>
+<url>26</url>
+</image>
+<image>
+<image_path>testdata/photo/72.jpg</image_path>
+<text>Shirley Li</text>
+<url>27</url>
+</image>
+<image>
+<image_path>testdata/photo/31.jpg</image_path>
+<text>Daniel Li</text>
+<url>28</url>
+</image>
+<image>
+<image_path>testdata/photo/70.jpg</image_path>
+<text>Zora Long</text>
+<url>29</url>
+</image>
+<image>
+<image_path>testdata/photo/57.jpg</image_path>
+<text>Spring Yang</text>
+<url>30</url>
+</image>
+<image>
+<image_path>testdata/photo/102.jpg</image_path>
+<text>Kaushik Yang</text>
+<url>31</url>
+</image>
+<image>
+<image_path>testdata/photo/95.jpg</image_path>
+<text>Lara Roman</text>
+<url>32</url>
+</image>
+<image>
+<image_path>testdata/photo/84.jpg</image_path>
+<text>Susan Long</text>
+<url>33</url>
+</image>
+<image>
+<image_path>testdata/photo/27.jpg</image_path>
+<text>Emilie Williams</text>
+<url>34</url>
+</image>
+<image>
+<image_path>testdata/photo/77.jpg</image_path>
+<text>Sigrid Rogers</text>
+<url>35</url>
+</image>
+<image>
+<image_path>testdata/photo/69.jpg</image_path>
+<text>Zona Davis</text>
+<url>36</url>
+</image>
+<image>
+<image_path>testdata/photo/45.jpg</image_path>
+<text>Johnson Black</text>
+<url>37</url>
+</image>
+<image>
+<image_path>testdata/photo/50.jpg</image_path>
+<text>Elias Ronaldo</text>
+<url>38</url>
+</image>
+<image>
+<image_path>testdata/photo/61.jpg</image_path>
+<text>Lara DuanMu</text>
+<url>39</url>
+</image>
+<image>
+<image_path>testdata/photo/83.jpg</image_path>
+<text>Johnson Xu</text>
+<url>40</url>
+</image>
+<image>
+<image_path>testdata/photo/10.jpg</image_path>
+<text>peter Long</text>
+<url>41</url>
 </image>
 </images>
 </settings>

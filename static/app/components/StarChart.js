@@ -225,25 +225,10 @@ Ext.define('Kitchensink.components.StarChart',{
         var orbit = this._borders;
         this.inc = this.CHART_WIDTH/(orbit[orbit.length-1]*2);
 
-//        ctx.strokeStyle="rgba(255,255,255, 0.9)";
-//        ctx.shadowColor='black';
-//        ctx.shadowBlur=20;
-//        var r=204, g=255, b=204;
-//        for(var i=orbit.length-1;i>=0;i--){
-//            ctx.beginPath(); 
-//            ctx.arc(x,y,orbit[i],0,Math.PI*2 ,false); // Outer circle 
-//            ctx.closePath();
-//            var color = this._getColor(i);
-//            ctx.fillStyle="rgba("+color[0]+","+color[1]+","+color[2]+", "+(orbit.length-i)/orbit.length+")";
-//            ctx.fillStyle="rgba("+r+","+g+","+b+", "+(orbit.length-i)/orbit.length+")";
-//            ctx.fill();
-//            ctx.stroke();
-//        }
-        
         var circles = this._bubbles;
         var offset = this._getOffset();
 //        ctx.strokeStyle="rgba(31,55,79,1)";
-        ctx.strokeStyle="rgba(255,255,255,1)";
+        ctx.strokeStyle="rgba(199,199,199,1)";
         ctx.clearShadow();
         for(var i=0;i<circles.length;i++){
             var pos = circles[i].pos;
@@ -285,15 +270,15 @@ Ext.define('Kitchensink.components.StarChart',{
             ctx.closePath();  
             ctx.fill();
 //            ctx.stroke();
-            ctx.fillStyle="#ffffff";
+            ctx.fillStyle="#000";
             ctx.font="bold 15pt Calibri";
-            ctx.shadowColor="black";
+            ctx.shadowColor="white";
             ctx.shadowBlur = 10;
 //            ctx.fillText(data.getCount()+"-"+Math.ceil(bubbleX)+"-"+Math.ceil(bubbleY),bubbleX,bubbleY);
             ctx.fillText(data.getCount(),bubbleX,bubbleY);
-            ctx.fillStyle="#ffffff";
-            ctx.font="normal 10pt Calibri";
-            ctx.shadowColor="black";
+            ctx.fillStyle="#000000";
+            ctx.font="normal 11pt Calibri";
+            ctx.shadowColor="white";
             ctx.shadowBlur = 6;
             ctx.fillText(data.get('roleName'),bubbleX, bubbleY+10);
         }

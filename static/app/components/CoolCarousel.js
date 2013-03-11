@@ -22,6 +22,7 @@ Ext.define('Kitchensink.components.CoolCarousel',{
      // todo add your logic here
          this.carousel = new Kitchensink.util.CoolCarousel();
          this.carousel.create('myCanvas','resources/testdata/config.xml');
+         this.fireEvent('selected', {text:'Hall Xu'});
          this.carousel.on(
              'selected', function(arg1, arg2){
                  that.fireEvent('selected', arg1);

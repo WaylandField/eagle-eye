@@ -146,6 +146,8 @@ Ext.define('Kitchensink.controller.Main', {
     },
 
     onRoleSelected: function(role){
+        this.showCarouselById();
+        return;
         var popup = this.getPopupDialog();
         popup.setSize(200, 600);
         popup.setRight(0);

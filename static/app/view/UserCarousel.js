@@ -12,8 +12,8 @@ Ext.define('Kitchensink.view.UserCarousel', {
             {
                 id: 'chartArea',
                 xtype:'panel',
-                height:400,
-                html: '<div id="chart1" style="width:330px;height:330px;display:inline-block"></div><div id="chart2" style="display:inline-block;width:330px;height:330px;"></div><div id="chart3" style="display:inline-block;width:330px;height:330px;"></div>'
+                height:420,
+                html: '<div class="userBox"><span id="userNameCon" class="name">Carla K Grant</span><span class="jobTitle">Senior Software Engineer</span><span class="division">Research & Development</span></div><div id="chart1" style="width:380px;height:330px;display:inline-block"></div><div id="chart2" style="display:inline-block;width:330px;height:330px;"></div><div id="chart3" style="display:inline-block;width:300px;height:330px;"></div>'
             }
         ]
      },
@@ -24,10 +24,11 @@ Ext.define('Kitchensink.view.UserCarousel', {
         carousel.on(
             'selected', function(arg1, arg2){
                 // Create a panel to put the chart in.
+                $('#userNameCon').text(arg1.text);
                 this.prepareChart();
-                this.drawChart('viz/stacked_column', document.getElementById('chart1'));
-                this.drawChart('viz/radar', document.getElementById('chart2'));
-                this.drawChart('viz/waterfall', document.getElementById('chart3'));
+                this.drawChart('viz/radar', document.getElementById('chart1'),'Competencies');
+                this.drawChart('viz/stacked_column', document.getElementById('chart2'), 'Learning Activities');
+                this.drawChart('viz/waterfall', document.getElementById('chart3'), 'Promote Hisotry');
             },
             this, {delay: 700}
         );
@@ -48,7 +49,7 @@ Ext.define('Kitchensink.view.UserCarousel', {
                 text: 'Learning Activities'
             }
         };
-        this.testData=this.testData||{
+        this.testData={
             'viz/stacked_column': {
                 'analysisAxis': [                 
                     {
@@ -56,14 +57,14 @@ Ext.define('Kitchensink.view.UserCarousel', {
                         'data': [{
                             'type': 'Dimension',
                             'name': 'Competency',
-                            'values': ['Technology', 'Communication', 'Management', 'Documentation']
+                            'values': ['Tech', 'Comm', 'Mgmt', 'Doc', 'Lang']
                         }]
                     }, {
                         'index': 2,
                         'data': [{
                             'type': 'Dimension',
                             'name': 'Learning',
-                            'values': [ 'In Progress' , 'Finished']
+                            'values': [ 'To Do' , 'Done']
                         }]
                     }],
                 'measureValuesGroup' :[{
@@ -71,16 +72,16 @@ Ext.define('Kitchensink.view.UserCarousel', {
                     'data': [{
                         'type': 'Measure',
                         'name': 'Competency',
-                        'values': [[2, 1, 3, 1], [1, 0, 1, 1]]
+                        'values': [this.randomArray(5, 0, 4), this.randomArray(5, 0, 2)]
                     }]
-                }]},
-            'viz/radar': {
+                }]}};
+            this.testData['viz/radar']= {
                 analysisAxis : [{
                     index : 1,
                     data : [{
                         type : "Dimension",
                         name : "",
-                        'values': ['Technology', 'Communication', 'Management', 'Documentation']
+                        'values': ['Tech', 'Comm', 'Mgmt', 'Doc', 'Lang']
                     }]
                 }],
                 
@@ -88,12 +89,11 @@ Ext.define('Kitchensink.view.UserCarousel', {
                     index : 1,
                     data : [{
                         type : "Measure",
-                        name : "Readiness",
-                        values : [[ 80, 90, 50, 70 ] ]
+                        name : "R",
+                        values : [this.randomArray(5, 20, 100) ]
                     }]
                 }]
-            }
-        };
+            };
         this.testData['viz/waterfall'] =       {
             'analysisAxis': [{
                 
@@ -109,20 +109,20 @@ Ext.define('Kitchensink.view.UserCarousel', {
                 'data' : [{
                     'type' : 'Measure',
                     'name' : 'Years',
-                    'values' : [[2,3,4,5]]
+                    'values' : [this.randomArray(4, 1, 6)]
                 }]
             }]};
         this.testDataFeeding=this.testDataFeeding||{};
         this.chartInstanceSet=this.chartInstanceSet||{};
         this.dsInstance=this.dsInstance||new sap.viz.data.CrosstableDataset();
     },
-    drawChart: function (chartId, element){
+    drawChart: function (chartId, element, title){
         this.dsInstance.setData(this.testData[chartId]);
         if(this.chartInstanceSet[chartId]){
             this.vizcore.destroyViz(this.chartInstanceSet[chartId]); //or chartInstance.destroy();        
             delete this.chartInstanceSet[chartId];
         }
-        
+        this.chartOption.title.text = title;
         this.chartInstanceSet[chartId] = this.vizcore.createViz({
             type : chartId,
             data : this.dsInstance,
@@ -130,5 +130,13 @@ Ext.define('Kitchensink.view.UserCarousel', {
             options : this.chartOption,
             dataFeeding : this.testDataFeeding[chartId]
         });
+    },
+    randomArray: function(length, min, max){
+        var r = [];
+        for(var i=0;i<length;i++){
+            r.push(Math.ceil(Math.random() * (max-min)) + min);
+        }
+        console.log(r);
+        return r;
     }
 });
