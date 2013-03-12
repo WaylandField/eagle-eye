@@ -10,10 +10,10 @@ Ext.application({
 
     glossOnIcon: false,
     icon: {
-        57: 'resources/icons/icon.png',
-        72: 'resources/icons/icon@72.png',
-        114: 'resources/icons/icon@2x.png',
-        144: 'resources/icons/icon@114.png'
+        57: 'resources/images/eagleEye.ico',
+        72: 'resources/images/eagleEye.ico',
+        114: 'resources/images/eagleEye.ico',
+        144: 'resources/images/eagleEye.ico'
     },
 
     phoneStartupScreen: 'resources/loading/Homescreen.jpg',
