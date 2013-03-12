@@ -17,13 +17,12 @@ module.exports = function(app, options){
         });
     });
 	
-	app.get('/api/role/:roleId/userCount', function(req, res){
-        var roleId = req.params.roleId;
+	app.get('/api/role/office/:office', function(req, res){
+        var office = req.params.office;
         console.log(req.params);
-        var query ={'roleId':roleId};
-        dao.getUsersCountOfRole(query, function(count){
-		    console.log('count:' +count);
-            res.send( JSON.stringify(count));
+        var query ={office:office};
+        dao.getRoles(query, function(records){
+            res.send(records);
         });
     });	
 	
