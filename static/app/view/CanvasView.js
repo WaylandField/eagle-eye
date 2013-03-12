@@ -54,14 +54,36 @@ Ext.define('Kitchensink.view.CanvasView', {
         this.callParent();
         var toolbar = Ext.getCmp('mainNavigationBar');
         toolbar.setTitle("Direct Reports Target Role Distribution @ Shanghai");
-        toolbar.add({
+        if(!toolbar.mapBtn){
+            var mapBtn = Ext.create('Ext.Button', {
+                id: 'mapbutton',
+                align : 'right',
+                ui    : 'action',
+                action: 'showMap',
+                text:'Map'
+            });
+            toolbar.mapBtn = mapBtn;
+            toolbar.add(mapBtn);
+        }
+        if(!toolbar.backBtn){
+            var backBtn = Ext.create('Ext.Button', {
+                id: 'backBtn',
+                align : 'left',
+                action: 'back',
+                text:' < Back',
+                hidden:true
+            });
+            toolbar.backBtn = backBtn;
+            toolbar.add(backBtn);
+        }
+/**        toolbar.add({
             xtype : 'button',
             id: 'mapbutton',
             align : 'right',
             ui    : 'action',
             action: 'showMap',
             text:'Map'
-        });
+        });**/
     }
     
 });

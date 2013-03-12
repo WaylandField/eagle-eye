@@ -29,5 +29,9 @@ Ext.define('Kitchensink.components.CoolCarousel',{
                  console.log(arg1);
              }
          );
-     }
+     },
+    gotoItem : function(index){
+        this.carousel.gotoItem(index);
+    }
+    
 });

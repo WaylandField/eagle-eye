@@ -136,11 +136,13 @@ Ext.define('Kitchensink.controller.Main', {
      */
     onMapTap: function() {
         var popup = this.getPopupDialog();
+        if(!popup.map){
+            popup.map = Ext.create('Kitchensink.components.BingMap',{
+                border:1
+            });
+            popup.add(popup.map);
+        }
         popup.setSize(550, 400);
-        popup.setItems([
-            {xtype:'bingmap',
-             border: 1}
-        ]);
         popup.showBy(this.getMapButton());
 
     },

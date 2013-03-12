@@ -1,7 +1,7 @@
 Ext.define('Kitchensink.view.UserCarousel', {
     extend: 'Ext.Panel',
     xtype: 'userCarousel',
-    requires:['Kitchensink.components.CoolCarousel'],
+    requires:['Kitchensink.components.CoolCarousel','Kitchensink.components.AutoComplete'],
     config : {layout: {
 	        type: 'vbox'
 	    },
@@ -13,18 +13,20 @@ Ext.define('Kitchensink.view.UserCarousel', {
                 id: 'chartArea',
                 xtype:'panel',
                 height:420,
-                html: '<div class="userBox"><span id="userNameCon" class="name">Carla K Grant</span><span class="jobTitle">Senior Software Engineer</span><span class="division">Research & Development</span></div><div id="chart1" style="width:380px;height:330px;display:inline-block"></div><div id="chart2" style="display:inline-block;width:330px;height:330px;"></div><div id="chart3" style="display:inline-block;width:300px;height:330px;"></div>'
+                html: '<div class="userBox"><span id="userNameCon" class="name"></span><span class="jobTitle">Senior Software Engineer</span><span class="division">Research & Development</span></div><div id="chart1" style="width:380px;height:330px;display:inline-block"></div><div id="chart2" style="display:inline-block;width:330px;height:330px;"></div><div id="chart3" style="display:inline-block;width:300px;height:330px;"></div>'
             }
         ]
      },
     initialize : function(){
         this.callParent();
+
+        var that = this;
         var carousel = Ext.getCmp('carousel');
         var chartArea = Ext.getCmp('chartArea');
         carousel.on(
             'selected', function(arg1, arg2){
                 // Create a panel to put the chart in.
-                $('#userNameCon').text(arg1.text);
+                if(arg1)$('#userNameCon').text(arg1.text);
                 this.prepareChart();
                 this.drawChart('viz/radar', document.getElementById('chart1'),'Competencies');
                 this.drawChart('viz/stacked_column', document.getElementById('chart2'), 'Learning Activities');
@@ -32,6 +34,70 @@ Ext.define('Kitchensink.view.UserCarousel', {
             },
             this, {delay: 700}
         );
+
+
+        var toolbar = Ext.getCmp('mainNavigationBar');
+        if(toolbar.backBtn){
+            toolbar.backBtn.show();
+        }
+        if(!toolbar.addBtn){
+            toolbar.addBtn = Ext.create('Ext.Button',{
+                id: 'addLAButton',
+                align : 'right',
+                ui    : 'action',
+                action: 'showMap',
+                text:'Add Learning'
+            });
+            toolbar.add([toolbar.addBtn]);
+        }
+        if(!toolbar.searchField){
+            toolbar.searchField = Ext.create('Ext.field.Text',{
+                label: 'Search',
+                align: 'right',
+                name: 'lastName',
+                listeners: {
+                    keyup : function(o, e){
+                        if(e.event.keyCode==13){
+                            var index = that.getUserIndex(this.getValue());
+                            if(index!=null) carousel.gotoItem(index);
+                        }
+                    }
+                }
+            });
+            toolbar.add([toolbar.searchField]);
+        }
+        if(toolbar.mapBtn){
+            toolbar.mapBtn.hide();
+        }
+        toolbar.setTitle("");
+//        var mapBtn = Ext.getCmp('mapbutton');
+//        mapBtn.hide();
+//        toolbar.add([
+//            {
+//                xtype : 'button',
+//                id: 'addLAButton',
+//                align : 'right',
+//                ui    : 'action',
+//                action: 'showMap',
+//                text:'Add Learning'
+/**            },
+            {
+                xtype: 'textfield',
+                label: 'Search',
+                align: 'right',
+                name: 'lastName',
+                listeners: {
+                    keyup : function(o, e){
+                        if(e.event.keyCode==13){
+                            var index = that.getUserIndex(this.getValue());
+                            if(index!=null) carousel.gotoItem(index);
+                        }
+                    }
+                }
+            }
+        ]);
+**/
+
     },
     prepareChart : function(){
         // Create a panel to put the chart in.
@@ -138,5 +204,64 @@ Ext.define('Kitchensink.view.UserCarousel', {
         }
         console.log(r);
         return r;
+    },
+    getUserIndex : function(str){
+        var users = [ 'Hall Xu',
+                      'Zora Green',
+                      'Sanchez Brown',
+                      'Emilie Huang',
+                      'Hiller Baker',
+                      'lei Roman',
+                      'Sheila Baker',
+                      'lei Brown',
+                      'Sigrid Rogers',
+                      'Diana Huang',
+                      'Emilie Smith',
+                      'Diana Richard',
+                      'Hiller Smith',
+                      'Shirley Liu',
+                      'Johnson Brown',
+                      'Liz Green',
+                      'Tom Johnson',
+                      'Garcia Black',
+                      'Sigrid Green',
+                      'Debby Jones',
+                      'Adams Huang',
+                      'Tom Xu',
+                      'Spring Johnson',
+                      'Debby Rogers',
+                      'Bright Richard',
+                      'Anderson Hu',
+                      'Rose Brown',
+                      'Shirley Li',
+                      'Daniel Li',
+                      'Zora Long',
+                      'Spring Yang',
+                      'Kaushik Yang',
+                      'Lara Roman',
+                      'Susan Long',
+                      'Emilie Williams',
+                      'Sigrid Rogers',
+                      'Zona Davis',
+                      'Johnson Black',
+                      'Elias Ronaldo',
+                      'Lara DuanMu',
+                      'Johnson Xu',
+                      'peter Long'];
+        if(this.searchItem!==str){
+            this.searchItem = str;
+            this.index = 0;
+        }
+        for(var i = this.index+1; i<users.length;i++){
+            var user = users[i];
+            if(user.toLowerCase().indexOf(this.searchItem.toLowerCase())!==-1){
+                this.index = i;
+                return i;
+            }
+            if(i>=users.length-1){
+                this.index = 0;
+            }
+        }
+        return null;
     }
 });

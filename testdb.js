@@ -21,6 +21,7 @@ db.roles.find({},function(err, docs){
         }
         var jj ="";
         var files = fs.readdirSync("./static/testdata/photo/");
+        console.log(names);
         for(var f in files){
             jj+="<image>\n";
             jj+="<image_path>testdata/photo/"+files[f]+"</image_path>\n";
@@ -28,7 +29,6 @@ db.roles.find({},function(err, docs){
             jj+="<url>"+f+"</url>\n";
             jj+="</image>\n";
         }
-        console.log(jj);
 
     }
 });
