@@ -29,9 +29,9 @@ Ext.define('Kitchensink.view.UserCarousel', {
                 if(arg1)$('#userNameCon').text(arg1.text);
                 $('#userBoxCon').show();
                 this.prepareChart();
-                this.drawChart('viz/radar', document.getElementById('chart1'),'Competencies');
+                this.drawChart('viz/radar', document.getElementById('chart1'),'Competencies Readiness');
                 this.drawChart('viz/stacked_column', document.getElementById('chart2'), 'Learning Activities');
-                this.drawChart('viz/waterfall', document.getElementById('chart3'), 'Promote Hisotry');
+                this.drawChart('viz/waterfall', document.getElementById('chart3'), 'Career Path');
             },
             this, {delay: 700}
         );

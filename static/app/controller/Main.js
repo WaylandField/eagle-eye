@@ -87,7 +87,7 @@ Ext.define('Kitchensink.controller.Main', {
     showMeetPortal : function(){
         var popup = this.getPopupDialog();
         if(popup.map)popup.map.hide();
-        popup.setHtml("To Create Meeting Requirest");
+        popup.setHtml("To Create Meeting Request");
         popup.showBy(this.getAddMeetBtn());
     },
 
