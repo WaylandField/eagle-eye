@@ -55,6 +55,7 @@ Ext.define('Kitchensink.components.BingMap',{
         var center = this.map.getCenter();
         for(var k in offices){
             var office = offices[k];
+            var name = office.name;
             var loc = new Microsoft.Maps.Location(office.latitude,office.longitude);
             var pin = new Microsoft.Maps.Pushpin(loc, {text: office.count});
             var pinInfoBox = new Microsoft.Maps.Infobox(
@@ -68,9 +69,10 @@ Ext.define('Kitchensink.components.BingMap',{
                  offset: new Microsoft.Maps.Point(0,15)}
             );
             pin.infobox = pinInfoBox;
+            pin.office = name;
             // Add handler for the pushpin click event.
             Microsoft.Maps.Events.addHandler(pin, 'click', function(){
-                that.fireEvent('change');
+                that.fireEvent('change', {office:this.target.office});
                 this.target.infobox.setOptions({ visible:true });
             });
             // Hide the infobox when the map is moved.

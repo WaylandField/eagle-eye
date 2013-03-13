@@ -23,7 +23,7 @@ Ext.define('Kitchensink.view.CanvasView', {
                 value: 50,
                 minValue: 0,
                 maxValue: 100
-            }**/
+            }
             ,{
                 id:'popupDialog',
                 xtype: 'panel',
@@ -47,13 +47,13 @@ Ext.define('Kitchensink.view.CanvasView', {
                 // Insert a title docked at the top with a title
                 items: [
                 ]
-            }
+            }**/
         ]
     },
     initialize : function(){
         this.callParent();
         var toolbar = Ext.getCmp('mainNavigationBar');
-        toolbar.setTitle("Eagle Eye");
+        toolbar.setTitle("Target Role Distribution Of My Reports At ");
         if(!toolbar.mapBtn){
             var mapBtn = Ext.create('Ext.Button', {
                 id: 'mapbutton',
@@ -83,8 +83,14 @@ Ext.define('Kitchensink.view.CanvasView', {
         if(toolbar.addBtn){
             toolbar.addBtn.hide();
         }
+        if(toolbar.addMeet){
+            toolbar.addMeet.hide();
+        }
         if(toolbar.searchField){
             toolbar.searchField.hide();
+        }
+        if(toolbar.topBtn){
+            toolbar.topBtn.hide();
         }
 /**        toolbar.add({
             xtype : 'button',

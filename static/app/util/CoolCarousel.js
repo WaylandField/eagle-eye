@@ -673,7 +673,7 @@ function Thumb(a, b, c, d) {
         this.txt.y = e-10;
         this.txt.shadow = new Shadow("#000", 0, 0, 5);
         this.imgContainer.addChild(this.txt);
-
+        
 		this.container.addChild(this.imgContainer);
 		this.imgContainer.cache(0, 0, d + f * 2, e + f * 2);
 		var g = b.reflHeight;

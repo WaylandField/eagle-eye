@@ -13,7 +13,7 @@ Ext.define('Kitchensink.view.UserCarousel', {
                 id: 'chartArea',
                 xtype:'panel',
                 height:420,
-                html: '<div class="userBox"><div style="display:inline-block;text-align:right"><span id="userNameCon" class="name"></span><br><span class="jobTitle">Senior Software Engineer</span><span class="division">Research & Development</span></div><span class="readiness" id="readiness"></span><span class="role">Lead Software Engineer</span></div><div id="chart1" style="width:380px;height:330px;display:inline-block"></div><div id="chart2" style="display:inline-block;width:330px;height:330px;"></div><div id="chart3" style="display:inline-block;width:300px;height:330px;"></div>'
+                html: '<div class="userBox" id="userBoxCon"><div style="display:inline-block;text-align:right"><span id="userNameCon" class="name"></span><br><span class="jobTitle">Senior Software Engineer</span><span class="division">Research & Development</span></div><span class="readiness" id="readiness"></span><span class="role"></span></div><div id="chart1" style="width:380px;height:330px;display:inline-block"></div><div id="chart2" style="display:inline-block;width:330px;height:330px;"></div><div id="chart3" style="display:inline-block;width:300px;height:330px;"></div>'
             }
         ]
      },
@@ -27,6 +27,7 @@ Ext.define('Kitchensink.view.UserCarousel', {
             'selected', function(arg1, arg2){
                 // Create a panel to put the chart in.
                 if(arg1)$('#userNameCon').text(arg1.text);
+                $('#userBoxCon').show();
                 this.prepareChart();
                 this.drawChart('viz/radar', document.getElementById('chart1'),'Competencies');
                 this.drawChart('viz/stacked_column', document.getElementById('chart2'), 'Learning Activities');
@@ -40,6 +41,17 @@ Ext.define('Kitchensink.view.UserCarousel', {
         if(toolbar.backBtn){
             toolbar.backBtn.show();
         }
+        if(!toolbar.topBtn){
+            toolbar.topBtn = Ext.create('Ext.Button',{
+                id: 'topBtn',
+                align : 'right',
+                ui    : 'action',
+                text:'Most Matched'
+            });
+            toolbar.add([toolbar.topBtn]);
+        }else{
+            toolbar.topBtn.show();
+        }
         if(!toolbar.addBtn){
             toolbar.addBtn = Ext.create('Ext.Button',{
                 id: 'addLAButton',
@@ -49,6 +61,18 @@ Ext.define('Kitchensink.view.UserCarousel', {
                 text:'Add Learning'
             });
             toolbar.add([toolbar.addBtn]);
+        }
+        if(!toolbar.addMeet){
+            toolbar.addMeet = Ext.create('Ext.Button',{
+                id: 'addMeet',
+                align : 'right',
+                ui    : 'action',
+                action: 'showMeet',
+                text:'Meeting Requests'
+            });
+            toolbar.add([toolbar.addMeet]);
+        }else{
+            toolbar.addMeet.show();
         }
         if(!toolbar.searchField){
             toolbar.searchField = Ext.create('Ext.field.Text',{
@@ -146,7 +170,7 @@ Ext.define('Kitchensink.view.UserCarousel', {
         for(var k in rArray){
             su+=rArray[k];
         }
-        $('#readiness').text(su/rArray.length);
+        $('#readiness').text((su/rArray.length)+"% Ready");
         this.testData['viz/radar']= {
             analysisAxis : [{
                 index : 1,

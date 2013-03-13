@@ -276,9 +276,9 @@ Ext.define('Kitchensink.components.StarChart',{
             ctx.closePath();  
             ctx.fill();
 //            ctx.stroke();
-            ctx.fillStyle="#000";
+            ctx.fillStyle="#fff";
             ctx.font="bold 15pt Calibri";
-            ctx.shadowColor="white";
+            ctx.shadowColor="black";
             ctx.shadowBlur = 10;
 //            ctx.fillText(data.getCount()+"-"+Math.ceil(bubbleX)+"-"+Math.ceil(bubbleY),bubbleX,bubbleY);
             ctx.fillText(data.getCount(),bubbleX,bubbleY);
@@ -286,7 +286,7 @@ Ext.define('Kitchensink.components.StarChart',{
             ctx.font="normal 11pt Calibri";
             ctx.shadowColor="white";
             ctx.shadowBlur = 6;
-            ctx.fillText(data.get('roleName'),bubbleX, bubbleY+10);
+            ctx.fillText(data.get('roleName'),bubbleX, bubbleY+12);
         }
     },
 /**    _drawGraph1 : function(){

@@ -47,7 +47,7 @@ Ext.define('Kitchensink.controller.tablet.Main', {
 //            ui: 'back',
 //            align: 'left'
 //        });
-        this.getLaunchscreen().removeAll(true, true);
+//        this.getLaunchscreen().removeAll(true, true);
         this.getLaunchscreen().setItems([view]);
 //        nav.goToNode(item.parentNode);
 //        nav.goToLeaf(item);

@@ -29,9 +29,13 @@ Ext.define('Kitchensink.store.Roles',{
 		            	               {name:"Project owner",count:1,id:21}]
     },
     randomMockData : function(){
+        var roles = ["Dev Manager","Product Manager","Senior Software Engineer","Senior Sales","CEO","Sales Manager","Achitect","CTO","Senior QA","QA Manager","Sales","Customer Support Expert","DBA","VP, Sales","VP, Technology","Product Service Expert","UI Developer","Java Developer","Lead SE","Principle SE"];
         var r = [];
-        for(var i=0;i<20;i++){
-            r.push({roleName:'role'+i, roleId:i, count:Math.ceil(Math.random()*100)+1});
+        var count = Math.ceil(Math.random()*10)+10;
+        for(var i=0;i<count;i++){
+            var rm = Math.ceil(Math.random()*(roles.length-1));
+            r.push({roleName:roles[rm], roleId:i, count:Math.ceil(Math.random()*100)+1});
+            roles.splice(rm, 1);
         }
         this.applyData(r);
         return this.getData().items;

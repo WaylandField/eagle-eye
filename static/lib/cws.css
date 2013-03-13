@@ -13,7 +13,8 @@
     border-bottom:1px dashed silver;
     border-radius:25px;
     padding:20px;
-    text-align:center
+    text-align:center;
+    display:none
 }
 .userBox .readiness{
     font-size:24px;

@@ -24,6 +24,9 @@ Ext.define('Kitchensink.controller.Main', {
             roleChart : '#roleChart',
             popupDialog:'#popupDialog',
             backBtn:'#backBtn',
+            topBtn : '#topBtn',
+            addLaBtn : '#addLAButton',
+            addMeetBtn : '#addMeet',
 
             sourceOverlay: {
                 selector: 'sourceoverlay',
@@ -44,6 +47,15 @@ Ext.define('Kitchensink.controller.Main', {
             },
             backBtn : {
                 tap:'backToMain'
+            },
+            topBtn:{
+                tap:'showMostMatched'
+            },
+            addLaBtn : {
+                tap:'showLAPortal'
+            },
+            addMeetBtn:{
+                tap:'showMeetPortal'
             }
         },
 
@@ -63,6 +75,25 @@ Ext.define('Kitchensink.controller.Main', {
          * is called and used by functions like onSourceTap to fetch the source code for the current demo.
          */
         currentDemo: undefined
+    },
+    
+    showLAPortal : function(){
+        var popup = this.getPopupDialog();
+        if(popup.map)popup.map.hide();
+        popup.setHtml("To Open Successfactors LMS Mobile Portal");
+        popup.showBy(this.getAddLaBtn());
+    },
+
+    showMeetPortal : function(){
+        var popup = this.getPopupDialog();
+        if(popup.map)popup.map.hide();
+        popup.setHtml("To Create Meeting Requirest");
+        popup.showBy(this.getAddMeetBtn());
+    },
+
+    showMostMatched : function(){
+        var carousel = Ext.getCmp('carousel');
+        carousel.gotoItem(0);
     },
 
     backToMain: function(){
@@ -125,6 +156,9 @@ Ext.define('Kitchensink.controller.Main', {
     },
 
     showCarouselById : function(id){
+        var popup = this.getPopupDialog();
+        if(popup.map)popup.map.hide();
+
     	this.showView({get:function get(t){
     		var jj = {
                 view: 'UserCarousel',
@@ -135,6 +169,8 @@ Ext.define('Kitchensink.controller.Main', {
     		};
     		return jj[t];
     	}});
+        var popup = this.getPopupDialog();
+        if(popup.map)popup.map.hide();
     },
     showOrgChart: function(){
         this.showView({get:function(t){
@@ -163,9 +199,11 @@ Ext.define('Kitchensink.controller.Main', {
             });
             var roleChart = Ext.getCmp('roleChart');
             popup.map.on({
-                'change':function(){
+                'change':function(obj){
                     roleChart.paint();
                     popup.hide();
+                    var mapBtn = Ext.getCmp('mapbutton');
+                    mapBtn.setText(obj.office);
                 }
             });
             popup.add(popup.map);
@@ -178,19 +216,6 @@ Ext.define('Kitchensink.controller.Main', {
     onRoleSelected: function(role){
         this.showCarouselById();
         return;
-        var popup = this.getPopupDialog();
-        popup.setSize(200, 600);
-        popup.setRight(0);
-        popup.setTop(0);
-        popup.setItems([
-            {
-                xtype:'list',
-                itemTpl:'{username}',
-                model:'Kitchensink.model.User',
-                data:role.data.users
-            }
-        ]);
-        popup.show();
     },
 
     /**
