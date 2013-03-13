@@ -53,28 +53,38 @@ Ext.define('Kitchensink.view.CanvasView', {
     initialize : function(){
         this.callParent();
         var toolbar = Ext.getCmp('mainNavigationBar');
-        toolbar.setTitle("Direct Reports Target Role Distribution @ Shanghai");
+        toolbar.setTitle("Eagle Eye");
         if(!toolbar.mapBtn){
             var mapBtn = Ext.create('Ext.Button', {
                 id: 'mapbutton',
                 align : 'right',
                 ui    : 'action',
                 action: 'showMap',
-                text:'Map'
+                text:'Shanghai',
+                label:'You Are In'
             });
             toolbar.mapBtn = mapBtn;
             toolbar.add(mapBtn);
+        }else{
+            toolbar.mapBtn.show();
         }
         if(!toolbar.backBtn){
             var backBtn = Ext.create('Ext.Button', {
                 id: 'backBtn',
                 align : 'left',
-                action: 'back',
                 text:' < Back',
                 hidden:true
             });
             toolbar.backBtn = backBtn;
             toolbar.add(backBtn);
+        }else{
+            toolbar.backBtn.hide();
+        }
+        if(toolbar.addBtn){
+            toolbar.addBtn.hide();
+        }
+        if(toolbar.searchField){
+            toolbar.searchField.hide();
         }
 /**        toolbar.add({
             xtype : 'button',

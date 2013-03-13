@@ -23,6 +23,7 @@ Ext.define('Kitchensink.controller.Main', {
             mapButton: 'button[action=showMap]',
             roleChart : '#roleChart',
             popupDialog:'#popupDialog',
+            backBtn:'#backBtn',
 
             sourceOverlay: {
                 selector: 'sourceoverlay',
@@ -40,6 +41,9 @@ Ext.define('Kitchensink.controller.Main', {
             },
             roleChart : {
             	roleSelected: 'onRoleSelected'
+            },
+            backBtn : {
+                tap:'backToMain'
             }
         },
 
@@ -59,6 +63,22 @@ Ext.define('Kitchensink.controller.Main', {
          * is called and used by functions like onSourceTap to fetch the source code for the current demo.
          */
         currentDemo: undefined
+    },
+
+    backToMain: function(){
+        this.showView({get:function get(t){
+    		var jj = {
+                text: 'Team Member Readiness for the Role "Dev Manager"',
+                card: false,
+                id: 'canvasView',
+                view: 'CanvasView',
+                animation: {
+                    type: 'slide',
+                    direction: 'up'
+                }
+    		};
+    		return jj[t];
+    	}});
     },
 
     /**
@@ -138,7 +158,15 @@ Ext.define('Kitchensink.controller.Main', {
         var popup = this.getPopupDialog();
         if(!popup.map){
             popup.map = Ext.create('Kitchensink.components.BingMap',{
+                id:'mapObj',
                 border:1
+            });
+            var roleChart = Ext.getCmp('roleChart');
+            popup.map.on({
+                'change':function(){
+                    roleChart.paint();
+                    popup.hide();
+                }
             });
             popup.add(popup.map);
         }

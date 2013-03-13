@@ -4,6 +4,7 @@ Ext.define('Kitchensink.model.Role',{
         fields:[
             {name:'roleName', type:'string'},
             {name:'roleId', type:'int'},
+            {name:'count', type:'int'},
             {name:'users', type:'array'}
         ],
         proxy: {
@@ -19,6 +20,10 @@ Ext.define('Kitchensink.model.Role',{
         }
     },
     getCount: function(){
-        return this.get('users')?this.get('users').length:0;
+        if(this.get('users')){
+            return this.get('users')?this.get('users').length:0;
+        }else{
+            return this.get('count');
+        }
     }
 });

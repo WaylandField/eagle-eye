@@ -37,6 +37,7 @@ Ext.define('Kitchensink.components.BingMap',{
         geo.updateLocation();
     },
     _paintMap : function(){
+        var that = this;
         var offices = [
             {name:'Pavilion Office', latitude:51, longitude:9, count:'20'},
             {name:'San Mateo Office', latitude:37.563, longitude:-122.3255, count:'20'},
@@ -69,6 +70,7 @@ Ext.define('Kitchensink.components.BingMap',{
             pin.infobox = pinInfoBox;
             // Add handler for the pushpin click event.
             Microsoft.Maps.Events.addHandler(pin, 'click', function(){
+                that.fireEvent('change');
                 this.target.infobox.setOptions({ visible:true });
             });
             // Hide the infobox when the map is moved.

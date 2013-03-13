@@ -13,7 +13,7 @@ Ext.define('Kitchensink.view.UserCarousel', {
                 id: 'chartArea',
                 xtype:'panel',
                 height:420,
-                html: '<div class="userBox"><span id="userNameCon" class="name"></span><span class="jobTitle">Senior Software Engineer</span><span class="division">Research & Development</span></div><div id="chart1" style="width:380px;height:330px;display:inline-block"></div><div id="chart2" style="display:inline-block;width:330px;height:330px;"></div><div id="chart3" style="display:inline-block;width:300px;height:330px;"></div>'
+                html: '<div class="userBox"><div style="display:inline-block;text-align:right"><span id="userNameCon" class="name"></span><br><span class="jobTitle">Senior Software Engineer</span><span class="division">Research & Development</span></div><span class="readiness" id="readiness"></span><span class="role">Lead Software Engineer</span></div><div id="chart1" style="width:380px;height:330px;display:inline-block"></div><div id="chart2" style="display:inline-block;width:330px;height:330px;"></div><div id="chart3" style="display:inline-block;width:300px;height:330px;"></div>'
             }
         ]
      },
@@ -141,25 +141,31 @@ Ext.define('Kitchensink.view.UserCarousel', {
                         'values': [this.randomArray(5, 0, 4), this.randomArray(5, 0, 2)]
                     }]
                 }]}};
-            this.testData['viz/radar']= {
-                analysisAxis : [{
-                    index : 1,
-                    data : [{
-                        type : "Dimension",
-                        name : "",
-                        'values': ['Tech', 'Comm', 'Mgmt', 'Doc', 'Lang']
-                    }]
-                }],
-                
-                measureValuesGroup : [{
-                    index : 1,
-                    data : [{
-                        type : "Measure",
-                        name : "R",
-                        values : [this.randomArray(5, 20, 100) ]
-                    }]
+        var rArray = this.randomArray(5, 20, 100);
+        var su = 0;
+        for(var k in rArray){
+            su+=rArray[k];
+        }
+        $('#readiness').text(su/rArray.length);
+        this.testData['viz/radar']= {
+            analysisAxis : [{
+                index : 1,
+                data : [{
+                    type : "Dimension",
+                    name : "",
+                    'values': ['Tech', 'Comm', 'Mgmt', 'Doc', 'Lang']
                 }]
-            };
+            }],
+            
+            measureValuesGroup : [{
+                index : 1,
+                data : [{
+                    type : "Measure",
+                    name : "R",
+                    values : [rArray]
+                }]
+            }]
+        };
         this.testData['viz/waterfall'] =       {
             'analysisAxis': [{
                 

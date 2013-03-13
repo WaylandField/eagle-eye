@@ -31,8 +31,9 @@ Ext.define('Kitchensink.store.Roles',{
     randomMockData : function(){
         var r = [];
         for(var i=0;i<20;i++){
-            r.push({name:'role'+i, count:Math.ceil(Math.random()*100)+1, id:i});
+            r.push({roleName:'role'+i, roleId:i, count:Math.ceil(Math.random()*100)+1});
         }
-        return r;
+        this.applyData(r);
+        return this.getData().items;
     }
 });

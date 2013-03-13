@@ -46,6 +46,12 @@ Ext.define('Kitchensink.components.StarChart',{
     },
     paint: function(){
         var that = this;
+        that._roles = that._store.randomMockData();
+        that._groups = Kitchensink.util.Utils.kmeans(that._roles, 'getCount', 5);
+        that._prepareData();
+        that._drawGraph();
+        return ;
+        
         var oper = {
             'action':'read',
             'filters':[Ext.create('Ext.util.Filter', {
